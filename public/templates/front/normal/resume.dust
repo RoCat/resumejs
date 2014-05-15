@@ -3,73 +3,105 @@
     <link rel="stylesheet" href="css/normal.css" />
 {/customCss}
 {<body}
-        <div id="presentation">
+        <div id="personnal_information">
             <div class="wrapper">
                 <div class="img_container">
+                    <img src="{infos.pictureUrl}" id="picture"/>
+                </div>
+                <div class="text_container">
+                    <div id="lastName">
+                        {infos.lastName}
+                    </div>
+                    <div id="firstName">
+                        {infos.firstName}
+                    </div>
+                    <div class="clearboth"></div>
+                    <div id="birthDate"><b>Date de naissance:</b> {@lt key=infos.dateOfBirth.day value="10"}0{/lt}{infos.dateOfBirth.day}/
+                        {@lt key=infos.dateOfBirth.month value="10"}0{/lt}{infos.dateOfBirth.month}/
+                        {infos.dateOfBirth.year}
+                    </div>
+                    <div id="address">
+                        <b>Adresse:</b> {infos.mainAddress|s}
+                    </div>
+                    <div id="email">
+                        <b>E-mail:</b> {infos.emailAddress|s}
+                    </div>
+                    <div id="phone">
+                        <b>Téléphones:</b>
+                        {#infos.phoneNumbers.values}
+                        <div class="phoneAsset">{.phoneNumber|s} ( {infos.phoneNumbers.values[0].phoneType|s} )</div>
+                        {/infos.phoneNumbers.values}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                </div>
-                <div id="presentation_summary">
-                    <div class="title">
-                        Hello,
-                    </div>
-                    <div class="subtitle">
-                        Welcome to my website
-                    </div>
-                    <div class="summary">
-                        {infos.summary|s}
-                    </div>
-                    <div class="smartButton">
-                        My Resume
-                        <div class="shadowRight"></div>
-                    </div>
-                </div>
-                <div id="presentation_contact">
-                    <div class="websites">
-                        <label>Websites</label>
-                        <p>http://resume.rocat.fr</p>
-                    </div>
-                    <div class="Email">
-                        <label>Email</label>
-                        catoio.romain@gmail.com
-                    </div>
-                    <div class="cell">
-                        <label>Cell</label>
-                        +33658120841
-                    </div>
-                    <div class="social">
-                        <label>Social links</label>
-                        +33658120841
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="personnalInformation">
-            <div id="lastName">
-                {infos.lastName}
-            </div>
-            <div id="firstName">
-                {infos.firstName}
-            </div>
-            <div id="birthDate">{@lt key=infos.dateOfBirth.day value="10"}0{/lt}{infos.dateOfBirth.day}/
-                {@lt key=infos.dateOfBirth.month value="10"}0{/lt}{infos.dateOfBirth.month}/
-                {infos.dateOfBirth.year}
-            </div>
-            <div id="pictureContainer"><img src="{infos.pictureUrl}" id="picture"/></div>
-        </div>
         <div id="resume">
-
-        </div>
-        <div id="experiences">
-
-        </div>
-        <div id="formations">
-
-        </div>
-        <div id="skills">
-
-        </div>
-        <div id="interests">
-
+            <div id="leftPart">
+                <div class="textBlock">
+                    <div class="title">
+                        Expériences profesionnelles:
+                    </div>
+                    {#.infos.positions.values}
+                    <div class="subtitle">
+                        {.title} - {.company.name}
+                    </div>
+                    <div class="date">
+                        {startDate.year} - {?isCurrent} Aujourd'hui {:else} {endDate.year} {/isCurrent}
+                    </div>
+                    <div class="job_description">
+                        {.summary|s}    ​
+                    </div>
+                    {/.infos.positions.values}
+                </div>
+                <div class="textBlock">
+                    <div class="title">
+                        Etudes:
+                    </div>
+                    {#.infos.educations.values}
+                    <div class="subtitle">
+                        {.degree} {.fieldOfStudy} - {.schoolName}:
+                    </div>
+                    <div class="date">
+                        {startDate.year} - {?isCurrent} Aujourd'hui {:else} {endDate.year} {/isCurrent}
+                    </div>
+                    <div class="job_description">
+                        {.notes|s}    ​
+                    </div>
+                    {/.infos.educations.values}
+                </div>
+                <div class="textBlock">
+                    <div class="title">
+                        Centres d'intérêt:
+                    </div>
+                    <div class="job_description" style="margin-left:25px;">
+                        {.infos.interests|s}    ​
+                    </div>
+                </div>
+            </div>
+            <div id="rightPart">
+                <div class="textBlock">
+                    <div class="title">
+                        Langues:
+                    </div>
+                    <div class="job_description">
+                        {#.infos.languages.values}
+                        <div>{.language.name}</div> <div>{.proficiency.name}</div><br />
+                        {/.infos.languages.values}
+                    </div>
+                </div>
+                <div class="textBlock">
+                    <div class="title">
+                        Compétences:
+                    </div>
+                    <div class="job_description">
+                        {#.infos.skills.values}
+                        {.skill.name}<br />
+                        {/.infos.skills.values}
+                    </div>
+                </div>
+            </div>
+            <div class="clearboth" />
         </div>
 
 {/body}

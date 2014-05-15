@@ -29,7 +29,7 @@ module.exports = function (app) {
         var linkedin = require('../lib/linkedIn.js');
         var infos = linkedin.getStoredInfo();
         model.infos = infos;
-        model.page = "home";
+        model.page = "resume";
         res.render('front/normal/resume.dust', model);
     });
 

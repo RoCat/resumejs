@@ -50,19 +50,27 @@ module.exports = function (app) {
     });
 
     app.get('/login', function (req, res) {
-        res.render('login', model);
+        var linkedin = require('../lib/linkedIn.js');
+        var infos = linkedin.getStoredInfo();
+        model.infos = infos;
+        model.page = "resume";
+        res.render('front/normal/login.dust', model);
     });
 
     app.post('/login', function (req, res) {
+        var linkedin = require('../lib/linkedIn.js');
+        var infos = linkedin.getStoredInfo();
+        model.infos = infos;
+        model.page = "resume";
         if(req.body.login && req.body.password){
             if(req.body.login === "admin" && req.body.password === "admin"){
                 req.session.isAdmin = 1;
                 res.redirect('/admin');
             } else {
-                res.render('login', model);
+                res.render('front/normal/login.dust', model);
             }
         } else {
-            res.render('login', model);
+            res.render('front/normal/login.dust', model);
         }
     });
 

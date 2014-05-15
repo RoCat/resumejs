@@ -17,7 +17,7 @@ module.exports = function (app) {
                 res.redirect('https://www.linkedin.com/uas/oauth2/authorization?response_type=code'
                     +'&client_id='+consumerKey
                     +'&state=toto'
-                    +'&scope=r_fullprofile+r_emailaddress'
+                    +'&scope=r_contactinfo+r_fullprofile+r_emailaddress'
                     +'&redirect_uri='+(callbackURL));
             } else {
                 console.log('passage2');
