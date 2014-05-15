@@ -1,0 +1,80 @@
+{>"front/normal/layout/normal" /}
+{<customCss }
+    <link rel="stylesheet" href="css/normal.css" />
+{/customCss}
+{<body}
+        <div id="presentation">
+            <div class="wrapper">
+                <div class="img_container">
+
+                </div>
+                <div id="presentation_summary">
+                    <div class="title">
+                        Hello,
+                    </div>
+                    <div class="subtitle">
+                        Welcome to my website
+                    </div>
+                    <div class="summary">
+                        {infos.summary|s}
+                    </div>
+                    <div class="smartButton">
+                        My Resume
+                        <div class="shadowRight"></div>
+                    </div>
+                </div>
+                <div id="presentation_contact">
+                    <div class="websites">
+                        <label>Websites</label>
+                        <p>http://resume.rocat.fr</p>
+                    </div>
+                    <div class="Email">
+                        <label>Email</label>
+                        catoio.romain@gmail.com
+                    </div>
+                    <div class="cell">
+                        <label>Cell</label>
+                        +33658120841
+                    </div>
+                    <div class="social">
+                        <label>Social links</label>
+                        +33658120841
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="personnalInformation">
+            <div id="lastName">
+                {infos.lastName}
+            </div>
+            <div id="firstName">
+                {infos.firstName}
+            </div>
+            <div id="birthDate">{@lt key=infos.dateOfBirth.day value="10"}0{/lt}{infos.dateOfBirth.day}/
+                {@lt key=infos.dateOfBirth.month value="10"}0{/lt}{infos.dateOfBirth.month}/
+                {infos.dateOfBirth.year}
+            </div>
+            <div id="pictureContainer"><img src="{infos.pictureUrl}" id="picture"/></div>
+        </div>
+        <div id="resume">
+
+        </div>
+        <div id="experiences">
+
+        </div>
+        <div id="formations">
+
+        </div>
+        <div id="skills">
+
+        </div>
+        <div id="interests">
+
+        </div>
+
+{/body}
+{<initScript}
+        <script>
+            var linkedInData = {.infos|js|s};
+        </script>
+{/initScript}

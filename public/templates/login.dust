@@ -1,0 +1,9 @@
+{>"layouts/master" /}
+
+{<body}
+<form action="/login" method="POST">
+<input type="hidden" name="_csrf" value="{_csrf}" />
+    login: <input name="login" type="text" /><br />
+    password: <input name="password" type="password" /><br />
+    <input type="submit" value="OK"/>
+{/body}

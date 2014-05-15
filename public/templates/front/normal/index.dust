@@ -1,0 +1,55 @@
+{>"front/normal/layout/normal" /}
+{<customCss }
+    <link rel="stylesheet" href="css/normal.css" />
+{/customCss}
+{<body}
+        <div id="presentation">
+            <div class="wrapper">
+                <div class="img_container">
+
+                </div>
+                <div id="presentation_summary">
+                    <div class="title">
+                        {adminData.title|s}
+                    </div>
+                    <div class="subtitle">
+                        {adminData.subtitle|s}
+                    </div>
+                    <div class="summary">
+                        {adminData.summary|s}
+                    </div>
+                    <div class="smartButton">
+                        My Resume
+                        <div class="shadowRight"></div>
+                    </div>
+                </div>
+                <div id="presentation_contact">
+                    <div class="websites">
+                        <label>Websites</label>
+                        <p>
+                            {#.infos.memberUrlResources.values}
+                            <a href="{.url|s}">{.url|s}</a><br />
+                            {/.infos.memberUrlResources.values}
+                        </p>
+                    </div>
+                    <div class="Email">
+                        <label>Email</label>
+                        catoio.romain@gmail.com
+                    </div>
+                    <div class="cell">
+                        <label>Cell</label>
+                        +33658120841
+                    </div>
+                    <div class="social">
+                        <label>Social links</label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+{/body}
+{<initScript}
+        <script>
+            var linkedInData = {.infos|js|s};
+        </script>
+{/initScript}

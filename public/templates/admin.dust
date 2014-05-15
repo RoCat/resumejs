@@ -1,0 +1,74 @@
+{>"layouts/master" /}
+
+{<body}
+    <div id="admin">
+        <div class="wrapper">
+            <form method="POST" action="/admin">
+            <div id="col1">
+                <label>LinkedIn login</label> {.linkedInLogin} <br />
+                <label>Last actualisation</label> {.lastActualisation} -
+                <span id="refresh"><a href="/getInfos?initialUrl=/admin">refresh</a></span> <br />
+                <label>Selected template <span class="required">*</span></label>
+                <select required name="template">
+                    {#.templates}
+                        <option  {@eq key=. value=adminData.template } selected {/eq} value="{.}">{.}</option>
+                    {/.templates}
+                </select>
+            </div>
+            <div id="col2">
+                <label>title <span class="required">*</span></label>
+                <input required type="text" name="title" value="{adminData.title}"/><br />
+                <label>subtitle <span class="required">*</span></label>
+                <input required type="text" name="subtitle" value="{adminData.subtitle}"/><br />
+                <label>summary <span class="required">*</span></label>
+                <textarea required name="summary">{adminData.summary}</textarea>
+            </div>
+            <div id="col3">
+                <label>facebook</label>
+                <input type="text" name="facebook" value="{adminData.facebook}"/><br />
+                <label>twitter</label>
+                <input type="text" name="twitter" value="{adminData.twitter}"/><br />
+                <label>github</label>
+                <input type="text" name="github" value="{adminData.github}"/>
+                <input type="hidden" name="_csrf" value="{_csrf}" />
+            </div>
+            <div class="clearboth"></div>
+            <div class="smartButton">
+                Submit
+                <div class="shadowRight"></div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(".smartButton").on("click", function(){
+            var form = $(this).parents("form");
+            var returnArr = [];
+            getEmptyRequired(form, returnArr);
+            if(returnArr.length>0){
+                for(var key in returnArr){
+                    $(returnArr[key]).css('border-color', 'red');
+                }
+            } else {
+                form.submit();
+            }
+        });
+        function getEmptyRequired(elem, returnArr){
+            if($(elem).attr('required') && !$(elem).val()){
+                returnArr.push(elem);
+            }
+            var children = [];
+            if(elem && typeof elem.children === "function")
+            {
+                children = elem.children();
+            } else {
+                children = elem.children;
+            }
+            if(children.length>0){
+                for(var elemKey = 0; elemKey < children.length; elemKey++){
+                    getEmptyRequired(children[elemKey], returnArr);
+                }
+            }
+        }
+    </script>
+{/body}
