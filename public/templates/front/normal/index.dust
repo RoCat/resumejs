@@ -34,15 +34,21 @@
                     </div>
                     <div class="Email">
                         <label>Email</label>
-                        catoio.romain@gmail.com
+                        {.infos.emailAddress|s}
                     </div>
                     <div class="cell">
                         <label>Cell</label>
-                        +33658120841
+                        {#infos.phoneNumbers.values}
+                        <div class="phoneAsset">{.phoneNumber|s} ( {infos.phoneNumbers.values[0].phoneType|s} )</div>
+                        {/infos.phoneNumbers.values}
                     </div>
                     <div class="social">
                         <label>Social links</label>
-
+                        {?.adminData.facebook}<a href="{.adminData.facebook}"><img src="images/facebook.png"/></a>{/.adminData.facebook}
+                        {?.adminData.twitter}<a href="{.adminData.twitter}"><img src="images/twitter.png"/></a>{/.adminData.twitter}
+                        {?.adminData.google}<a href="{.adminData.google}"><img src="images/google.png"/></a>{/.adminData.google}
+                        {?.adminData.github}<a href="{.adminData.github}"><img src="images/github.png"/></a>{/.adminData.github}
+                        {?.infos.publicProfileUrl}<a href="{.infos.publicProfileUrl}"><img src="images/in.png"/></a>{/.infos.publicProfileUrl}
                     </div>
                 </div>
             </div>

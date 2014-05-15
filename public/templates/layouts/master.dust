@@ -21,13 +21,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Resume</a>
+          <a class="navbar-brand" href="/">Resume</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
           <ul class="nav navbar-nav">
-            <li {@eq key=page value="home"} class="active" {/eq}><a href="/">Home</a></li>
+            <li {@eq key=page value="home"} class="active" {/eq}><a href="/">Front</a></li>
             <li {@eq key=page value="admin"} class="active" {/eq}><a href="/admin">Admin</a></li>
             <li><a href="#">Download</a></li>
           </ul>

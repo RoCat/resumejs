@@ -53,7 +53,7 @@ module.exports = function (app) {
         var linkedin = require('../lib/linkedIn.js');
         var infos = linkedin.getStoredInfo();
         model.infos = infos;
-        model.page = "resume";
+        model.page = "admin";
         res.render('front/normal/login.dust', model);
     });
 
@@ -61,9 +61,9 @@ module.exports = function (app) {
         var linkedin = require('../lib/linkedIn.js');
         var infos = linkedin.getStoredInfo();
         model.infos = infos;
-        model.page = "resume";
+        model.page = "admin";
         if(req.body.login && req.body.password){
-            if(req.body.login === "admin" && req.body.password === "admin"){
+            if(req.body.login === "admin" && req.body.password === "rMickeyaide1986t"){
                 req.session.isAdmin = 1;
                 res.redirect('/admin');
             } else {

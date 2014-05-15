@@ -12,6 +12,7 @@
   right: 0px;
   top: 0px;
   height:155px;
+  min-width:745px;
   -webkit-background-clip: border-box;
   -webkit-background-origin: padding-box;
   -webkit-background-size: auto;
@@ -35,7 +36,7 @@
   position:relative;
 }
 #header_content {
-  width:980px;
+  max-width:980px;
   margin:auto;
   position:relative;
   height:155px;
@@ -129,26 +130,35 @@
 }
 
 #resume {
-  margin-bottom:50px;
+  position:relative;
 }
 
 #resume #leftPart {
-  width:675px;
-  margin-right:50px;
-  float:left;
+  max-width:675px;
+  min-width:510px;
+  width:68%;
+  position:absolute;
+  left:0px;
+  top:0px;
+  margin-bottom:50px;
 }
 #resume #rightPart {
   width:235px;
   overflow:hidden;
-  float:right;
+  position:absolute;
+  right:0px;
+  top:0px;
 }
 #resume #rightPart .textBlock {
   width: 100%;
-  margin-top:40px;
+  margin-top:41px;
   color: @grey;
   font-size: 14px;
   font-weight:normal;
   font-family: 'open sans', sans-serif;
+}
+.social img {
+  margin-right: 5px;
 }
 
 #resume #rightPart .title {
@@ -191,6 +201,7 @@
 
 #resume #leftPart .textBlock {
   width: 100%;
+  padding-left:5px;
   margin-top:35px;
   color: @grey;
   font-size: 14px;
@@ -199,7 +210,7 @@
 }
 
 #resume #leftPart .textBlock .job_description {
-  padding-right:50px;
+  padding-left:25px;
 }
 
 #resume #leftPart .textBlock .date {
@@ -249,7 +260,8 @@
 }
 #personnal_information .text_container {
   float:left;
-  width:640px;
+  max-width: 640px;
+  min-width: 505px;
   height:100%;
   color: @grey;
   padding-left:35px;
@@ -277,7 +289,8 @@
 #page {
   position:relative;
   margin-top:200px;
-  width:980px;
+  max-width:980px;
+  min-width:745px;
 }
 #presentation_summary {
   width: 350px;
