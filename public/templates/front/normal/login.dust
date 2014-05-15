@@ -1,0 +1,19 @@
+{>"front/normal/layout/normal" /}
+{<customCss }
+<link rel="stylesheet" href="css/normal.css" />
+{/customCss}
+
+{<body}
+<div id="admin">
+    <div class="wrapper">
+        <form action="/login" method="POST">
+            <input type="hidden" name="_csrf" value="{_csrf}" />
+            <label for="login">login:</label>
+            <input id="login" name="login" type="text" /><br />
+            <label for="password">password:</label>
+            <input id="password" name="password" type="password" /><br />
+            <input type="submit" value="OK"/>
+        </form>
+    </div>
+</div>
+{/body}
