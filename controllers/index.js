@@ -21,7 +21,9 @@ module.exports = function (app) {
         } else {
             model.adminData = {};
         }
-        res.render('themes/'+model.adminData.template+'/index.dust', model);
+        var themeLib = require('../lib/theme.js');
+        var themedView = themeLib.getThemedView('index', app.settings);
+        res.render(themedView, model);
     });
 
     app.get('/resume', function (req, res) {
@@ -36,7 +38,9 @@ module.exports = function (app) {
         }
         model.infos = infos;
         model.page = "resume";
-        res.render('themes/'+model.adminData.template+'/resume.dust', model);
+        var themeLib = require('../lib/theme.js');
+        var themedView = themeLib.getThemedView('resume', app.settings);
+        res.render(themedView, model);
     });
 
 

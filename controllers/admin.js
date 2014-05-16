@@ -16,7 +16,7 @@ module.exports = function (app) {
             model.lastActualisation = infos.lastActualisation;
             model.linkedInLogin = infos.emailAddress;
             model.page = "admin";
-            model.templates = fs.readdirSync('public/templates/front');
+            model.templates = fs.readdirSync('public/themes/templates');
             if(fs.existsSync('data/adminInfo.json')){
                 model.adminData = JSON.parse(fs.readFileSync('data/adminInfo.json', 'utf8'));
             } else {
@@ -54,7 +54,9 @@ module.exports = function (app) {
         var infos = linkedin.getStoredInfo();
         model.infos = infos;
         model.page = "admin";
-        res.render('front/normal/login.dust', model);
+        var themeLib = require('../lib/theme.js');
+        var themedView = themeLib.getThemedView('login', app.settings);
+        res.render(themedView, model);
     });
 
     app.post('/login', function (req, res) {
@@ -67,10 +69,14 @@ module.exports = function (app) {
                 req.session.isAdmin = 1;
                 res.redirect('/admin');
             } else {
-                res.render('front/normal/login.dust', model);
+                var themeLib = require('../lib/theme.js');
+                var themedView = themeLib.getThemedView('login', app.settings);
+                res.render(themedView, model);
             }
         } else {
-            res.render('front/normal/login.dust', model);
+            var themeLib = require('../lib/theme.js');
+            var themedView = themeLib.getThemedView('login', app.settings);
+            res.render(themedView, model);
         }
     });
 
