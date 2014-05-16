@@ -21,16 +21,22 @@ module.exports = function (app) {
         } else {
             model.adminData = {};
         }
-        console.log(model.adminData);
-        res.render('front/normal/index.dust', model);
+        res.render('themes/'+model.adminData.template+'/index.dust', model);
     });
 
     app.get('/resume', function (req, res) {
         var linkedin = require('../lib/linkedIn.js');
         var infos = linkedin.getStoredInfo();
+        var fs = require("fs");
+        var path = require("path");
+        if(fs.existsSync('data/adminInfo.json')){
+            model.adminData = JSON.parse(fs.readFileSync('data/adminInfo.json', 'utf8').replace(/\\n/g, '<br \>'));
+        } else {
+            model.adminData = {};
+        }
         model.infos = infos;
         model.page = "resume";
-        res.render('front/normal/resume.dust', model);
+        res.render('themes/'+model.adminData.template+'/resume.dust', model);
     });
 
 
