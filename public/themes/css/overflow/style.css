@@ -1585,3 +1585,36 @@
 .companyName {
     font-size:50px;text-align:center;font-weight:bold;
 }
+.box :last-child .skillValue {
+    position:relative;
+    background-color:#fff;
+    margin-bottom:20px;
+    width:245px;
+    height:186px;
+    margin:20px;
+}
+.skillInnerTable {
+    position:absolute;height:100%;width:100%;z-index: 5;
+}
+
+.box.style2 .inner .row.asset3:before
+{
+    top: 50%;
+    border-bottom: solid 1px #fff;
+    width: -webkit-calc(100% - 72px);
+}
+
+.box.style2 .inner .row.asset3 {
+    width:calc(100%/4*3);
+    margin-left: 15%;
+}
+
+.box.style2 .inner .row.asset3 .\33u{
+    width: calc(33% - 2px);
+}
+.box.style2 .inner .row.asset3 .\33u .skillValue{
+    margin:0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-bottom: 1=20px;
+}

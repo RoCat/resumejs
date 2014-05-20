@@ -294,3 +294,52 @@
 		{
 			opacity: 0.5;
 		}
+
+.button.style4 {
+    margin-bottom: 20px;
+}
+.exp_dates {
+    font-size:1.2em;text-align:center;font-weight:bold;
+}
+.leftPart {
+    width:50%;
+    float:left;
+    padding-right:0px;
+}
+.leftPartContainer {
+    width:170px;
+    margin:auto;
+    overflow: hidden;
+    margin-top:20%;
+    background-color:rgba(255,255,255,0.25);
+    border-radius:10px;
+}
+.rightPart {
+    width:50%;
+    float:right;
+    padding-left:3em;
+}
+.rightPartContainer {
+    margin-top:20%;
+    background-color:rgba(255,255,255,0.25);
+    border-radius:10px;
+}
+.companyName {
+    font-size:1.3em;text-align:center;font-weight:bold;
+}
+.box :last-child .skillValue  {
+    margin:auto;
+    margin-top:20px;
+    width:80%;
+    height:90px;
+}
+
+.box.style2 .inner .row.asset3 {
+    width:100%;
+    margin: 0px;
+}
+.box.style2 .inner .row.asset3 .\33u .skillValue {
+    margin:auto;
+    margin-top:20px;
+    margin-bottom:20px;
+}
