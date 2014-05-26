@@ -4,9 +4,9 @@
 
 module.exports = function (app) {
 
-    var consumerKey = '75wmm7yzmoh1lr'
-        , consumerSecret = 'OYzMys4V3XqgksAn'
-        , callbackURL = "http%3A%2F%2Flocalhost.wyplay.com%3A8000%2Fauth";
+    var consumerKey = app.customConfig.linkedIn.consumerKey
+        , consumerSecret = app.customConfig.linkedIn.consumerSecret
+        , callbackURL = app.customConfig.linkedIn.callbackUrl;
 
 
 
@@ -51,7 +51,7 @@ module.exports = function (app) {
                         rez = JSON.parse(rez);
                         if(rez && rez.access_token){
                             req.session.token = rez.access_token;
-                            res.redirect('/getInfos');
+                            res.redirect('/getLinkedinData');
                         } else {
                             res.send(rez);
                         }

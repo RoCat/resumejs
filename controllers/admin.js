@@ -10,18 +10,15 @@ module.exports = function (app) {
 
     app.get('/admin', function (req, res) {
         if(req.session.isAdmin){
-            var linkedin = require('../lib/linkedIn.js');
-            var infos = linkedin.getStoredInfo();
+            var scrappers = require('../lib/scrappers.js');
+            model.scrappers = scrappers.getScrappersData();
+            var adminLib = require('../lib/admin.js');
             var fs = require('fs');
-            model.lastActualisation = infos.lastActualisation;
-            model.linkedInLogin = infos.emailAddress;
+            model.lastActualisation = model.scrappers.linkedInData.lastActualisation;
+            model.linkedInLogin = model.scrappers.linkedInData.emailAddress;
             model.page = "admin";
             model.templates = fs.readdirSync('public/themes/templates');
-            if(fs.existsSync('data/adminInfo.json')){
-                model.adminData = JSON.parse(fs.readFileSync('data/adminInfo.json', 'utf8'));
-            } else {
-                model.adminData = {};
-            }
+            model.adminData = adminLib.getStoredData();
             res.render('admin', model);
         } else {
             res.redirect('/login');
@@ -30,7 +27,6 @@ module.exports = function (app) {
 
     app.post('/admin', function (req, res) {
         if(req.session.isAdmin){
-            console.log(req.body);
             var jsonObj = {};
             jsonObj.template = req.body.template;
             jsonObj.title = req.body.title;
@@ -40,19 +36,18 @@ module.exports = function (app) {
             jsonObj.twitter = req.body.twitter;
             jsonObj.github = req.body.github;
             jsonObj = JSON.stringify(jsonObj);
-            var fs = require('fs');
-            var path = require('path');
-            console.log(fs.writeFileSync(path.resolve("data/adminInfo.json"), jsonObj));
-            res.redirect('/admin');
+            var admin = require('../lib/admin.js');
+            admin.storeData(jsonObj, function(err,data){
+                res.redirect('/admin');
+            });
         } else {
             res.redirect('/login');
         }
     });
 
     app.get('/login', function (req, res) {
-        var linkedin = require('../lib/linkedIn.js');
-        var infos = linkedin.getStoredInfo();
-        model.infos = infos;
+        var scrappers = require('../lib/scrappers.js');
+        model.scrappers = scrappers.getScrappersData();
         model.page = "admin";
         var themeLib = require('../lib/theme.js');
         var themedView = themeLib.getThemedView('login', app.settings);
@@ -60,12 +55,11 @@ module.exports = function (app) {
     });
 
     app.post('/login', function (req, res) {
-        var linkedin = require('../lib/linkedIn.js');
-        var infos = linkedin.getStoredInfo();
-        model.infos = infos;
+        var scrappers = require('../lib/scrappers.js');
+        model.scrappers = scrappers.getScrappersData();
         model.page = "admin";
         if(req.body.login && req.body.password){
-            if(req.body.login === "admin" && req.body.password === "rMickeyaide1986t"){
+            if(req.body.login === app.customConfig.admin.login && req.body.password === app.customConfig.admin.password){
                 req.session.isAdmin = 1;
                 res.redirect('/admin');
             } else {
@@ -80,21 +74,16 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/getInfos', function (req, res) {
+    app.get('/getLinkedInData', function (req, res) {
+        var scrappers = require('../lib/scrappers.js');
         if(req.session.isAdmin){
             if(req.query.initialUrl) {
                 req.session.initialUrl = req.query.initialUrl;
             }
             if(req.session.token){
-                var linkedin = require('../lib/linkedIn.js');
-                linkedin.getInfos(req.session.token, function(err, infos){
-                    var path = require('path');
-                    var fs = require('fs');
-                    var currentDate = new Date();
-                    infos = JSON.parse(infos);
-                    infos.lastActualisation = currentDate.getTime();
-                    infos = JSON.stringify(infos);
-                    fs.writeFile(path.resolve("data/linkedInInfo.json"), infos, function(err) {
+                var linkedin = scrappers.getScrapper('linkedIn');
+                linkedin.getData(req.session.token, function(err, linkedInData){
+                    linkedin.storeData(linkedInData, function (err, data) {
                         if(err) {
                             res.send(err);
                         } else {
@@ -103,7 +92,7 @@ module.exports = function (app) {
                                 res.redirect(req.session.initialUrl);
                                 req.session.initialUrl = undefined;
                             } else {
-                                res.send(infos);
+                                res.send(linkedInData);
                             }
                         }
                     });
@@ -113,6 +102,43 @@ module.exports = function (app) {
             }
         } else {
             res.redirect('/login');
+        }
+    });
+
+    app.get('/getGithubData', function (req, res) {
+        var scrappers = require('../lib/scrappers.js');
+        var fs = require('fs');
+        var path = require('path');
+        if(req.session.isAdmin){
+            if(req.query.initialUrl) {
+                req.session.initialUrl = req.query.initialUrl;
+            }
+            var adminData = {};
+            if(fs.existsSync('data/adminData.json')){
+                adminData = JSON.parse(fs.readFileSync('data/adminData.json', 'utf8'));
+            }
+            if(adminData && adminData.github){
+                var github = scrappers.getScrapper('github');
+                github.getData('rocat', function(err, githubData){
+                    github.storeData(githubData, function (err, data) {
+                        if(err) {
+                            res.send(err);
+                        } else {
+                            console.log(req.session);
+                            if(req.session.initialUrl){
+                                res.redirect(req.session.initialUrl);
+                                req.session.initialUrl = undefined;
+                            } else {
+                                res.send(githubData);
+                            }
+                        }
+                    });
+                });
+            } else {
+                res.redirect('/auth');
+            }
+        } else {
+            res.redirect('/admin');
         }
     });
 };

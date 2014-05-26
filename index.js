@@ -2,14 +2,12 @@
 
 
 var kraken = require('kraken-js'),
-    db = require('./lib/mongo'),
     express = require('express'),
     app = {};
 
 
 app.configure = function configure(nconf, next) {
     // Async method run on startup.
-    //db.config(nconf.get('databaseConfig'));
     next(null);
 };
 
@@ -21,12 +19,25 @@ app.requestStart = function requestStart(server) {
 
 app.requestBeforeRoute = function requestBeforeRoute(server) {
     // Run before any routes have been added.
+    server.customConfig = require('./config/customConfig.json');
     server.use(express.methodOverride());
 };
 
 
 app.requestAfterRoute = function requestAfterRoute(server) {
     // Run after all routes have been added.
+    //if route is not found redirect to index controller with current route as a view to display
+    var errorFunc = function(){
+        return function (req, res, next) {
+            var i = 0;
+            while (i < server.routes.get.length && server.routes.get[i].path !== "/"){
+                i++;
+            }
+            req.themedController = req._parsedUrl.path.substr(1,req._parsedUrl.path.length);
+            server.routes.get[i].callbacks[0](req, res, next);
+        }
+    };
+    server.use(errorFunc());
 };
 
 

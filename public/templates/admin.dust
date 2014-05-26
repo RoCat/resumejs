@@ -7,7 +7,7 @@
             <div id="col1">
                 <label>LinkedIn login</label> {.linkedInLogin} <br />
                 <label>Last actualisation</label> {.lastActualisation} -
-                <span id="refresh"><a href="/getInfos?initialUrl=/admin">refresh</a></span> <br />
+                <span id="refresh"><a href="/getLinkedInData?initialUrl=/admin">refresh</a></span> <br />
                 <label>Selected template <span class="required">*</span></label>
                 <select required name="template">
                     {#.templates}

@@ -10,36 +10,18 @@ module.exports = function (app) {
 
 
     app.get('/', function (req, res) {
-        var linkedin = require('../lib/linkedIn.js');
-        var infos = linkedin.getStoredInfo();
-        model.infos = infos;
-        model.page = "home";
-        var fs = require("fs");
-        var path = require("path");
-        if(fs.existsSync('data/adminInfo.json')){
-            model.adminData = JSON.parse(fs.readFileSync('data/adminInfo.json', 'utf8').replace(/\\n/g, '<br \>'));
-        } else {
-            model.adminData = {};
-        }
-        var themeLib = require('../lib/theme.js');
-        var themedView = themeLib.getThemedView('index', app.settings);
-        res.render(themedView, model);
-    });
+        var scrappers = require('../lib/scrappers.js');
+        model.scrappers = scrappers.getScrappersData();
+        var adminLib = require('../lib/admin.js');
+        model.adminData = adminLib.getStoredData();
 
-    app.get('/resume', function (req, res) {
-        var linkedin = require('../lib/linkedIn.js');
-        var infos = linkedin.getStoredInfo();
-        var fs = require("fs");
-        var path = require("path");
-        if(fs.existsSync('data/adminInfo.json')){
-            model.adminData = JSON.parse(fs.readFileSync('data/adminInfo.json', 'utf8').replace(/\\n/g, '<br \>'));
-        } else {
-            model.adminData = {};
+        var themedController = req.themedController;
+        if(!themedController){
+            themedController = 'index';
         }
-        model.infos = infos;
-        model.page = "resume";
+        model.page = themedController;
         var themeLib = require('../lib/theme.js');
-        var themedView = themeLib.getThemedView('resume', app.settings);
+        var themedView = themeLib.getThemedView(themedController, app.settings);
         res.render(themedView, model);
     });
 

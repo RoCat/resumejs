@@ -14,9 +14,9 @@
 <body>
 <div id="header">
     <div id="header_content">
-        <div id="header_firstName">{infos.firstName}</div>
-        <div id="header_lastName">{infos.lastName}</div>
-        <div id="header_headline">{infos.headline}</div>
+        <div id="header_firstName">{scrappers.linkedInData.firstName}</div>
+        <div id="header_lastName">{scrappers.linkedInData.lastName}</div>
+        <div id="header_headline">{scrappers.linkedInData.headline}</div>
         <div id="header_navBar">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">

@@ -27,20 +27,20 @@
                     <div class="websites">
                         <label>Websites</label>
                         <p>
-                            {#.infos.memberUrlResources.values}
+                            {#.scrappers.linkedInData.memberUrlResources.values}
                             <a href="{.url|s}">{.url|s}</a><br />
-                            {/.infos.memberUrlResources.values}
+                            {/.scrappers.linkedInData.memberUrlResources.values}
                         </p>
                     </div>
                     <div class="Email">
                         <label>Email</label>
-                        {.infos.emailAddress|s}
+                        {.scrappers.linkedInData.emailAddress|s}
                     </div>
                     <div class="cell">
                         <label>Cell</label>
-                        {#infos.phoneNumbers.values}
-                        <div class="phoneAsset">{.phoneNumber|s} ( {infos.phoneNumbers.values[0].phoneType|s} )</div>
-                        {/infos.phoneNumbers.values}
+                        {#scrappers.linkedInData.phoneNumbers.values}
+                        <div class="phoneAsset">{.phoneNumber|s} ( {scrappers.linkedInData.phoneNumbers.values[0].phoneType|s} )</div>
+                        {/scrappers.linkedInData.phoneNumbers.values}
                     </div>
                     <div class="social">
                         <label>Social links</label>
@@ -48,7 +48,7 @@
                         {?.adminData.twitter}<a href="{.adminData.twitter}"><img src="images/twitter.png"/></a>{/.adminData.twitter}
                         {?.adminData.google}<a href="{.adminData.google}"><img src="images/google.png"/></a>{/.adminData.google}
                         {?.adminData.github}<a href="{.adminData.github}"><img src="images/github.png"/></a>{/.adminData.github}
-                        {?.infos.publicProfileUrl}<a href="{.infos.publicProfileUrl}"><img src="images/in.png"/></a>{/.infos.publicProfileUrl}
+                        {?.scrappers.linkedInData.publicProfileUrl}<a href="{.scrappers.linkedInData.publicProfileUrl}"><img src="images/in.png"/></a>{/.scrappers.linkedInData.publicProfileUrl}
                     </div>
                 </div>
             </div>
@@ -56,6 +56,6 @@
 {/body}
 {<initScript}
         <script>
-            var linkedInData = {.infos|js|s};
+            var scrappers.linkedInData = {.scrappers.linkedInData|js|s};
         </script>
 {/initScript}

@@ -6,31 +6,31 @@
         <div id="personnal_information">
             <div class="wrapper">
                 <div class="img_container">
-                    <img src="{infos.pictureUrl}" id="picture"/>
+                    <img src="{scrappers.linkedInData.pictureUrl}" id="picture"/>
                 </div>
                 <div class="text_container">
                     <div id="lastName">
-                        {infos.lastName}
+                        {scrappers.linkedInData.lastName}
                     </div>
                     <div id="firstName">
-                        {infos.firstName}
+                        {scrappers.linkedInData.firstName}
                     </div>
                     <div class="clearboth"></div>
-                    <div id="birthDate"><b>Date de naissance:</b> {@lt key=infos.dateOfBirth.day value="10"}0{/lt}{infos.dateOfBirth.day}/
-                        {@lt key=infos.dateOfBirth.month value="10"}0{/lt}{infos.dateOfBirth.month}/
-                        {infos.dateOfBirth.year}
+                    <div id="birthDate"><b>Date de naissance:</b> {@lt key=scrappers.linkedInData.dateOfBirth.day value="10"}0{/lt}{scrappers.linkedInData.dateOfBirth.day}/
+                        {@lt key=scrappers.linkedInData.dateOfBirth.month value="10"}0{/lt}{scrappers.linkedInData.dateOfBirth.month}/
+                        {scrappers.linkedInData.dateOfBirth.year}
                     </div>
                     <div id="address">
-                        <b>Adresse:</b> {infos.mainAddress|s}
+                        <b>Adresse:</b> {scrappers.linkedInData.mainAddress|s}
                     </div>
                     <div id="email">
-                        <b>E-mail:</b> {infos.emailAddress|s}
+                        <b>E-mail:</b> {scrappers.linkedInData.emailAddress|s}
                     </div>
                     <div id="phone">
                         <b>Téléphones:</b>
-                        {#infos.phoneNumbers.values}
-                        <div class="phoneAsset">{.phoneNumber|s} ( {infos.phoneNumbers.values[0].phoneType|s} )</div>
-                        {/infos.phoneNumbers.values}
+                        {#scrappers.linkedInData.phoneNumbers.values}
+                        <div class="phoneAsset">{.phoneNumber|s} ( {scrappers.linkedInData.phoneNumbers.values[0].phoneType|s} )</div>
+                        {/scrappers.linkedInData.phoneNumbers.values}
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="title">
                         Expériences profesionnelles:
                     </div>
-                    {#.infos.positions.values}
+                    {#.scrappers.linkedInData.positions.values}
                     <div class="subtitle">
                         {.title} - {.company.name}
                     </div>
@@ -52,13 +52,13 @@
                     <div class="job_description">
                         {.summary|s}    ​
                     </div>
-                    {/.infos.positions.values}
+                    {/.scrappers.linkedInData.positions.values}
                 </div>
                 <div class="textBlock">
                     <div class="title">
                         Etudes:
                     </div>
-                    {#.infos.educations.values}
+                    {#.scrappers.linkedInData.educations.values}
                     <div class="subtitle">
                         {.degree} {.fieldOfStudy} - {.schoolName}:
                     </div>
@@ -68,14 +68,14 @@
                     <div class="job_description">
                         {.notes|s}    ​
                     </div>
-                    {/.infos.educations.values}
+                    {/.scrappers.linkedInData.educations.values}
                 </div>
                 <div class="textBlock">
                     <div class="title">
                         Centres d'intérêt:
                     </div>
                     <div class="job_description" style="margin-left:25px;">
-                        {.infos.interests|s}    ​
+                        {.scrappers.linkedInData.interests|s}    ​
                     </div>
                 </div>
             </div>
@@ -85,9 +85,9 @@
                         Langues:
                     </div>
                     <div class="job_description">
-                        {#.infos.languages.values}
+                        {#.scrappers.linkedInData.languages.values}
                         <div>{.language.name}</div> <div>{.proficiency.name}</div><br />
-                        {/.infos.languages.values}
+                        {/.scrappers.linkedInData.languages.values}
                     </div>
                 </div>
                 <div class="textBlock">
@@ -95,9 +95,9 @@
                         Compétences:
                     </div>
                     <div class="job_description">
-                        {#.infos.skills.values}
+                        {#.scrappers.linkedInData.skills.values}
                         {.skill.name}<br />
-                        {/.infos.skills.values}
+                        {/.scrappers.linkedInData.skills.values}
                     </div>
                 </div>
             </div>
@@ -106,6 +106,6 @@
 {/body}
 {<initScript}
         <script>
-            var linkedInData = {.infos|js|s};
+            var scrappers.linkedInData = {.scrappers.linkedInData|js|s};
         </script>
 {/initScript}

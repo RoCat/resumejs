@@ -27,8 +27,8 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<h1>{infos.lastName|s} {infos.firstName|s}</h1>
-					<p>{infos.headline|s}</p>
+					<h1>{scrappers.linkedInData.lastName|s} {scrappers.linkedInData.firstName|s}</h1>
+					<p>{scrappers.linkedInData.headline|s}</p>
 				</header>
 				<footer>
 					<a href="#banner" class="button style2 scrolly scrolly-centered">Continue</a>
@@ -47,7 +47,7 @@
 				</footer>
 			</section>
 
-        {#.infos.positions.values}
+        {#.scrappers.linkedInData.positions.values}
 		<!-- Feature 1 -->
 			<article style="background-color:transparent;" id="exp_{$idx}" class="container box style1 img{$idx} right">
                 <div class="leftPartBackground"></div>
@@ -69,7 +69,7 @@
                 <div style="clear:both;"></div>
                 <footer style="text-align: center;">
                     {@math key="{$idx}" method="add" operand=1}
-                        {@eq value=infos.positions._total }
+                        {@eq value=scrappers.linkedInData.positions._total }
                             <a href="#formation_0" class="button style4 scrolly">Continue</a>
                         {:else}
                             <a href="#exp_{@math key="{$idx}" method="add" operand="1"/}" class="button style4 scrolly">Continue</a>
@@ -77,9 +77,9 @@
                     {/math}
                 </footer>
 			</article>
-        {/.infos.positions.values}
+        {/.scrappers.linkedInData.positions.values}
 
-        {#.infos.educations.values}
+        {#.scrappers.linkedInData.educations.values}
         <!-- Feature 2 -->
         <article style="background-color:transparent;" id="formation_{$idx}" class="container box style1 img{$idx} left">
             <div class="leftPartBackground"></div>
@@ -103,7 +103,7 @@
             <div style="clear:both;"></div>
             <footer style="text-align: center;">
                 {@math key="{$idx}" method="add" operand=1}
-                {@eq value=infos.educations._total }
+                {@eq value=scrappers.linkedInData.educations._total }
                 <a href="#skills" class="button style4 scrolly">Continue</a>
                 {:else}
                 <a href="#formation_{@math key="{$idx}" method="add" operand="1"/}" class="button style4 scrolly">Continue</a>
@@ -111,7 +111,7 @@
                 {/math}
             </footer>
         </article>
-        {/.infos.educations.values}
+        {/.scrappers.linkedInData.educations.values}
 
 		<!-- Portfolio -->
 			<article id="skills" class="container box style2">
@@ -120,7 +120,7 @@
 				</header>
 				<div class="inner gallery">
 					<div class="row flush">
-                        {#.infos.skills.values}
+                        {#.scrappers.linkedInData.skills.values}
                         <div class="3u">
                             <div class="skillValue">
                                 <table class="skillInnerTable">
@@ -134,13 +134,13 @@
                         </div>
                         {@if cond="({$idx}+1)%4 ==0"}
                             </div>
-                            {@if cond="({infos.skills._total}-({$idx}+1)) < 4"}
+                            {@if cond="({scrappers.linkedInData.skills._total}-({$idx}+1)) < 4"}
                                 <div class="row asset3 flush">
                             {:else}
                                 <div class="row flush">
                             {/if}
                         {/if}
-                        {/.infos.skills.values}
+                        {/.scrappers.linkedInData.skills.values}
 					</div>
 				</div>
 			</article>
