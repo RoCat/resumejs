@@ -12,23 +12,23 @@
 //     "routePath": "path:./controllers"
 // },
 //
-//  "view engines": {
-//      "js": {
-//         "module": "adaro",
-//         "settings": {
-//             "helpers": null,
-//             "stream": false
-//         }
-//      },
-//
-//     "dust": {
-//         "module": "adaro",
-//         "settings": {
-//             "helpers": null,
-//             "stream": false
-//         }
-//     }
-// },
+  "view engines": {
+      "js": {
+         "module": "adaro",
+         "settings": {
+             "helpers": null,
+             "stream": false
+         }
+      },
+
+     "dust": {
+         "module": "adaro",
+         "settings": {
+             "helpers": null,
+             "stream": false
+         }
+     }
+ }
 // "express": {
 //     "x-powered-by": false,
 //     "trust proxy": false,
@@ -41,8 +41,8 @@
 //     "view engine": "js",
 //     "views": "path:./.build/templates"
 // }
-    "databaseConfig": {
-        "connectionString": "mongodb://username:password$@paulo.mongohq.com:10087/appname"
-    }
+// "databaseConfig": {
+//     "connectionString": "mongodb://username:password$@paulo.mongohq.com:10087/appname"
+// }
 
 }

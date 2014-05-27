@@ -20,6 +20,8 @@ app.requestStart = function requestStart(server) {
 app.requestBeforeRoute = function requestBeforeRoute(server) {
     // Run before any routes have been added.
     server.customConfig = require('./config/customConfig.json');
+    var scrappers = require('./lib/scrappers.js');
+    server.customConfig.scrappers = scrappers.getScrappersConfig();
     server.use(express.methodOverride());
 };
 
@@ -46,6 +48,7 @@ if (require.main === module) {
         if (err) {
             console.error(err.stack);
         }
+        require('./lib/dustjs-helpers.js');
     });
 }
 

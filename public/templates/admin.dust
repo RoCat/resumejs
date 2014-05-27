@@ -5,9 +5,10 @@
         <div class="wrapper">
             <form method="POST" action="/admin">
             <div id="col1">
-                <label>LinkedIn login</label> {.linkedInLogin} <br />
-                <label>Last actualisation</label> {.lastActualisation} -
-                <span id="refresh"><a href="/getLinkedInData?initialUrl=/admin">refresh</a></span> <br />
+                {#.scrappersNames}
+                    <label>Last {.} actualisation</label> {@getLastActualisation scrappers="{scrappers|js|s}" name="{.}" /}  -
+                    <span id="refresh"><a href="/getScrapperData?scrapper={.}&initialUrl=/admin">refresh</a></span> <br />
+                {/.scrappersNames}
                 <label>Selected template <span class="required">*</span></label>
                 <select required name="template">
                     {#.templates}

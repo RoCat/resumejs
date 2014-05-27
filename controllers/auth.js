@@ -3,72 +3,23 @@
 
 
 module.exports = function (app) {
-
-    var consumerKey = app.customConfig.linkedIn.consumerKey
-        , consumerSecret = app.customConfig.linkedIn.consumerSecret
-        , callbackURL = app.customConfig.linkedIn.callbackUrl;
-
-
-
     app.get('/auth', function (req, res) {
         if(req.session.isAdmin){
-            if(!req.query.code){
-                console.log('passage1');
-                res.redirect('https://www.linkedin.com/uas/oauth2/authorization?response_type=code'
-                    +'&client_id='+consumerKey
-                    +'&state=toto'
-                    +'&scope=r_contactinfo+r_fullprofile+r_emailaddress'
-                    +'&redirect_uri='+(callbackURL));
-            } else {
-                console.log('passage2');
-                var https = require('https');
-                var querystring = require('querystring');
-                var post_data = querystring.stringify({
-                });
-                var options = {
-                    host: 'www.linkedin.com',
-                    port: '443',
-                    path: '/uas/oauth2/accessToken?grant_type=authorization_code'
-                        +'&client_id='+consumerKey
-                        +'&client_secret='+consumerSecret
-                        +'&state='+'toto'
-                        +'&code='+req.query.code
-                        +'&redirect_uri='+callbackURL,
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Content-Length': post_data.length
-                    }
-                };
-
-                var request = https.request(options, function(res2){
-                    res2.setEncoding('utf8');
-                    var rez = '';
-                    res2.on('data', function (chunk) {
-                        rez += chunk;
-                    });
-                    res2.on('end', function(){
-                        rez = JSON.parse(rez);
-                        if(rez && rez.access_token){
-                            req.session.token = rez.access_token;
-                            res.redirect('/getLinkedinData');
-                        } else {
-                            res.send(rez);
-                        }
-                    });
-                    res2.on('error',function(err){console.log(err);})
-                });
-                request.write(post_data);
-                request.end();
-                request.on('error', function(err){
-                    res.send(err);
-                });
-            }
+            var scrappers = require('../lib/scrappers.js');
+            var scrapper = scrappers.getScrapper(req.query.scrapper);
+            scrapper.auth(req, res);
         } else {
             res.redirect('/login');
         }
     });
-
-
+    app.get('/authCallback', function (req, res) {
+        if(req.session.isAdmin){
+            var scrappers = require('../lib/scrappers.js');
+            var scrapper = scrappers.getScrapper(req.query.scrapper);
+            scrapper.authCallback(req, res);
+        } else {
+            res.redirect('/login');
+        }
+    });
 };
 

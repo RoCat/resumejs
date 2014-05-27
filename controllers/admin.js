@@ -11,11 +11,10 @@ module.exports = function (app) {
     app.get('/admin', function (req, res) {
         if(req.session.isAdmin){
             var scrappers = require('../lib/scrappers.js');
+            model.scrappersNames = scrappers.getScrappers();
             model.scrappers = scrappers.getScrappersData();
             var adminLib = require('../lib/admin.js');
             var fs = require('fs');
-            model.lastActualisation = model.scrappers.linkedInData.lastActualisation;
-            model.linkedInLogin = model.scrappers.linkedInData.emailAddress;
             model.page = "admin";
             model.templates = fs.readdirSync('public/themes/templates');
             model.adminData = adminLib.getStoredData();
@@ -73,17 +72,37 @@ module.exports = function (app) {
             res.render(themedView, model);
         }
     });
-
-    app.get('/getLinkedInData', function (req, res) {
+    app.get('/getScrapperData', function(req, res){
+        var pScrapper = req.query.scrapper;
         var scrappers = require('../lib/scrappers.js');
         if(req.session.isAdmin){
             if(req.query.initialUrl) {
                 req.session.initialUrl = req.query.initialUrl;
             }
-            if(req.session.token){
-                var linkedin = scrappers.getScrapper('linkedIn');
-                linkedin.getData(req.session.token, function(err, linkedInData){
-                    linkedin.storeData(linkedInData, function (err, data) {
+            var scrapper = scrappers.getScrapper(pScrapper);
+            if(scrapper.isOauth){
+                if(req.session[pScrapper+"_token"]){
+                    scrapper.getData(req.session.linkedIn_token, function(err, scrapperData){
+                        scrapper.storeData(scrapperData, function (err, data) {
+                            if(err) {
+                                res.send(err);
+                            } else {
+                                console.log(req.session);
+                                if(req.session.initialUrl){
+                                    res.redirect(req.session.initialUrl);
+                                    req.session.initialUrl = undefined;
+                                } else {
+                                    res.send(scrapperData);
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    res.redirect('/auth?scrapper='+pScrapper);
+                }
+            } else {
+                scrapper.getData(app.customConfig.scrappers[pScrapper].login, function(err, scrapperData){
+                    scrapper.storeData(scrapperData, function (err, data) {
                         if(err) {
                             res.send(err);
                         } else {
@@ -92,53 +111,14 @@ module.exports = function (app) {
                                 res.redirect(req.session.initialUrl);
                                 req.session.initialUrl = undefined;
                             } else {
-                                res.send(linkedInData);
+                                res.send(scrapperData);
                             }
                         }
                     });
                 });
-            } else {
-                res.redirect('/auth');
             }
         } else {
             res.redirect('/login');
-        }
-    });
-
-    app.get('/getGithubData', function (req, res) {
-        var scrappers = require('../lib/scrappers.js');
-        var fs = require('fs');
-        var path = require('path');
-        if(req.session.isAdmin){
-            if(req.query.initialUrl) {
-                req.session.initialUrl = req.query.initialUrl;
-            }
-            var adminData = {};
-            if(fs.existsSync('data/adminData.json')){
-                adminData = JSON.parse(fs.readFileSync('data/adminData.json', 'utf8'));
-            }
-            if(adminData && adminData.github){
-                var github = scrappers.getScrapper('github');
-                github.getData('rocat', function(err, githubData){
-                    github.storeData(githubData, function (err, data) {
-                        if(err) {
-                            res.send(err);
-                        } else {
-                            console.log(req.session);
-                            if(req.session.initialUrl){
-                                res.redirect(req.session.initialUrl);
-                                req.session.initialUrl = undefined;
-                            } else {
-                                res.send(githubData);
-                            }
-                        }
-                    });
-                });
-            } else {
-                res.redirect('/auth');
-            }
-        } else {
-            res.redirect('/admin');
         }
     });
 };
