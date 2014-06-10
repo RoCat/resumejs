@@ -7,7 +7,7 @@
 <div id="admin">
     <div class="wrapper">
         <form action="/login" method="POST">
-            <input type="hidden" name="_csrf" value="{_csrf}" />
+            <input id="csrf" type="hidden" name="_csrf" value="{_csrf}" />
             <label for="login">login:</label>
             <input id="login" name="login" type="text" /><br />
             <label for="password">password:</label>

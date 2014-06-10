@@ -15,7 +15,7 @@ module.exports = function (app) {
             model.scrappers = scrappers.getScrappersData();
             var adminLib = require('../lib/admin.js');
             var fs = require('fs');
-            model.page = "admin";
+            model.page = 'admin';
             model.templates = fs.readdirSync('public/themes/templates');
             model.adminData = adminLib.getStoredData();
             res.render('admin', model);
@@ -36,7 +36,7 @@ module.exports = function (app) {
             jsonObj.github = req.body.github;
             jsonObj = JSON.stringify(jsonObj);
             var admin = require('../lib/admin.js');
-            admin.storeData(jsonObj, function(err,data){
+            admin.storeData(jsonObj, function(){
                 res.redirect('/admin');
             });
         } else {
@@ -47,7 +47,7 @@ module.exports = function (app) {
     app.get('/login', function (req, res) {
         var scrappers = require('../lib/scrappers.js');
         model.scrappers = scrappers.getScrappersData();
-        model.page = "admin";
+        model.page = 'admin';
         var themeLib = require('../lib/theme.js');
         var themedView = themeLib.getThemedView('login', app.settings);
         res.render(themedView, model);
@@ -56,19 +56,17 @@ module.exports = function (app) {
     app.post('/login', function (req, res) {
         var scrappers = require('../lib/scrappers.js');
         model.scrappers = scrappers.getScrappersData();
-        model.page = "admin";
+        model.page = 'admin';
+        var themeLib = require('../lib/theme.js');
+        var themedView = themeLib.getThemedView('login', app.settings);
         if(req.body.login && req.body.password){
             if(req.body.login === app.customConfig.admin.login && req.body.password === app.customConfig.admin.password){
                 req.session.isAdmin = 1;
                 res.redirect('/admin');
             } else {
-                var themeLib = require('../lib/theme.js');
-                var themedView = themeLib.getThemedView('login', app.settings);
                 res.render(themedView, model);
             }
         } else {
-            var themeLib = require('../lib/theme.js');
-            var themedView = themeLib.getThemedView('login', app.settings);
             res.render(themedView, model);
         }
     });
@@ -81,9 +79,9 @@ module.exports = function (app) {
             }
             var scrapper = scrappers.getScrapper(pScrapper);
             if(scrapper.isOauth){
-                if(req.session[pScrapper+"_token"]){
+                if(req.session[pScrapper+'_token']){
                     scrapper.getData(req.session.linkedIn_token, function(err, scrapperData){
-                        scrapper.storeData(scrapperData, function (err, data) {
+                        scrapper.storeData(scrapperData, function (err) {
                             if(err) {
                                 res.send(err);
                             } else {
@@ -102,7 +100,7 @@ module.exports = function (app) {
                 }
             } else {
                 scrapper.getData(app.customConfig.scrappers[pScrapper].login, function(err, scrapperData){
-                    scrapper.storeData(scrapperData, function (err, data) {
+                    scrapper.storeData(scrapperData, function (err) {
                         if(err) {
                             res.send(err);
                         } else {

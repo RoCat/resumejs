@@ -32,7 +32,7 @@ describe('index', function () {
             .get('/')
             .expect(200)
             .expect('Content-Type', /html/)
-            .expect(/Hello, /)
+            .expect(/.*Hello,.*/)
             .end(function(err, res){
                 done(err);
             });

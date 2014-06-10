@@ -13,7 +13,7 @@ module.exports = function (app) {
         var scrappers = require('../lib/scrappers.js');
         model.scrappers = scrappers.getScrappersData();
         var adminLib = require('../lib/admin.js');
-        model.adminData = adminLib.getStoredData();
+        model.adminData = adminLib.getStoredData(true);
 
         var themedController = req.themedController;
         if(!themedController){

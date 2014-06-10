@@ -25,7 +25,8 @@
     "linkedin-js": "^0.1.4",
     "mongoose": "^3.8.9",
     "common-dustjs-helpers": "^0.1.0",
-    "moment": "^2.6.0"
+    "moment": "^2.6.0",
+    "jsdom": "^0.10.5"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
