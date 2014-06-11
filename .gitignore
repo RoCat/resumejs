@@ -28,4 +28,6 @@ config.app.json
 
 #config files
 config/customConfig.json
-lib/scrappers/*.json
+lib/scrappers/github.json
+lib/scrappers/linkedIn.json
+
