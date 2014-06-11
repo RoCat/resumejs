@@ -28,3 +28,4 @@ config.app.json
 
 #config files
 config/customConfig.json
+lib/scrappers/*.json
