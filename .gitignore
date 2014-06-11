@@ -25,3 +25,6 @@ build/Release
 node_modules
 config.app.json
 .build/*
+
+#config files
+config/customConfig.json
