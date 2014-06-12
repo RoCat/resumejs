@@ -2,7 +2,7 @@
 
 
 module.exports = function AdminModel() {
-    return {
-        name: 'resume'
-    };
+  return {
+    name: 'resume'
+  };
 };
