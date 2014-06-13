@@ -1,7 +1,7 @@
-{>"layouts/master" /}
+{>"themes/normal/layout/normal" /}
 
 {<body}
-    <h1>{@pre type="content" key="header"/}</h1>
-    <p>{@pre type="content" key="description"/}</p>
-        {.|js}
+    <h1>500 error in there !</h1>
+    <p>Try again later</p>
+    {.|js}
 {/body}
