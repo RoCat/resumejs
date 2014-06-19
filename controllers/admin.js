@@ -11,14 +11,23 @@ module.exports = function (app) {
   app.get('/admin', function (req, res) {
     if(req.session.isAdmin){
       var scrappers = require('../lib/scrappers.js');
+      var adminLib = require('../lib/admin.js');
+      var themeLib = require('../lib/theme.js');
+      var fs = require('fs');
+
       model.scrappersNames = scrappers.getScrappers();
       model.scrappers = scrappers.getScrappersData();
-      var adminLib = require('../lib/admin.js');
-      var fs = require('fs');
       model.page = 'admin';
-      model.templates = fs.readdirSync('public/themes/templates');
+      model.themes = fs.readdirSync('public/themes/templates');
       model.adminData = adminLib.getStoredData();
-      res.render('admin', model);
+
+      themeLib.getThemeData(model.adminData.theme, function(err, themeData){
+        console.log(themeData);
+        if(!err){
+          model.themeData = themeData;
+        }
+        res.render('admin', model);
+      });
     } else {
       res.redirect('/login');
     }
@@ -26,18 +35,28 @@ module.exports = function (app) {
 
   app.post('/admin', function (req, res) {
     if(req.session.isAdmin){
-      var jsonObj = {};
-      jsonObj.template = req.body.template;
-      jsonObj.title = req.body.title;
-      jsonObj.subtitle = req.body.subtitle;
-      jsonObj.summary = req.body.summary;
-      jsonObj.facebook = req.body.facebook;
-      jsonObj.twitter = req.body.twitter;
-      jsonObj.github = req.body.github;
-      jsonObj = JSON.stringify(jsonObj);
-      var admin = require('../lib/admin.js');
-      admin.storeData(jsonObj, function(){
-        res.redirect('/admin');
+      var themeLib = require('../lib/theme.js');
+      themeLib.getThemeData(req.body.theme, function(err, themeData){
+        if(!err){
+          var jsonObj = {};
+          jsonObj.theme = req.body.theme;
+          jsonObj.facebook = req.body.facebook;
+          jsonObj.twitter = req.body.twitter;
+          jsonObj.github = req.body.github;
+          jsonObj = JSON.stringify(jsonObj);
+          var admin = require('../lib/admin.js');
+          admin.storeData(jsonObj, function(){
+            var tempThemeData = {};
+            for(var dataKey in themeData.customFields){
+              tempThemeData[themeData.customFields[dataKey].name]= (req.body['themeCustomField_'+themeData.customFields[dataKey].name])?req.body['themeCustomField_'+themeData.customFields[dataKey].name]:themeData.customFields[dataKey];
+            }
+            themeLib.storeData(req.body.theme, tempThemeData, function(){
+              res.redirect('/admin');
+            });
+          });
+        } else {
+          res.redirect('/admin');
+        }
       });
     } else {
       res.redirect('/login');
@@ -85,7 +104,6 @@ module.exports = function (app) {
               if(err) {
                 res.send(err);
               } else {
-                console.log(req.session);
                 if(req.session.initialUrl){
                   res.redirect(req.session.initialUrl);
                   req.session.initialUrl = undefined;
@@ -104,7 +122,6 @@ module.exports = function (app) {
             if(err) {
               res.send(err);
             } else {
-              console.log(req.session);
               if(req.session.initialUrl){
                 res.redirect(req.session.initialUrl);
                 req.session.initialUrl = undefined;

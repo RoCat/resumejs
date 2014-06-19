@@ -40,7 +40,7 @@ describe('index', function () {
 
   it('should say error if no scrapper', function (done) {
     request(mock)
-      .get('/getData')
+      .get('/scrapperData')
       .expect(200)
       .expect('Content-Type', /application\/json/)
       .expect(/.*This scrapper does not exist or have no data.*/)
@@ -51,7 +51,7 @@ describe('index', function () {
 
   it('should say error if bad scrapper', function (done) {
     request(mock)
-      .get('/getData?scrapper=Google')
+      .get('/scrapperData?scrapper=Google')
       .expect(200)
       .expect('Content-Type', /application\/json/)
       .expect(/.*This scrapper does not exist or have no data.*/)
@@ -62,7 +62,7 @@ describe('index', function () {
 
   it('no error if scrapper', function (done) {
     request(mock)
-      .get('/getData?scrapper=github')
+      .get('/scrapperData?scrapper=github')
       .expect(200)
       .expect('Content-Type', /application\/json/)
       .expect(/.*"id": */)

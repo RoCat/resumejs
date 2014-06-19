@@ -20,10 +20,13 @@ module.exports = function (app) {
     model.page = themedController;
     var themeLib = require('../lib/theme.js');
     var themedView = themeLib.getThemedView(themedController, app.settings);
-    res.render(themedView, model);
+    themeLib.getThemeData(model.adminData.theme, function(err,themeData){
+      model.themeData = themeData;
+      res.render(themedView, model);
+    });
   });
 
-  app.get('/getData', function (req, res) {
+  app.get('/scrapperData', function (req, res) {
     var scrapper = req.query.scrapper;
     var scrappers = require('../lib/scrappers.js');
     var scrapperData = scrappers.getScrapper(scrapper);
@@ -36,6 +39,21 @@ module.exports = function (app) {
       }
     }
     res.send(scrapperData);
+  });
+
+  app.get('/themeData', function (req, res) {
+    var themeLib = require('../lib/theme.js');
+    var adminLib = require('../lib/admin.js');
+    var theme = req.query.theme;
+    if(!theme){
+      theme = adminLib.getStoredData(true).theme;
+    }
+    themeLib.getThemeData(theme, function(err,themeData){
+      if(err){
+        themeData = {'error':'This theme does not exist or have no data.'};
+      }
+      res.send(themeData);
+    });
   });
 
 };

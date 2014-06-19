@@ -1,0 +1,18 @@
+{
+  "usedScrappers": {
+    "github": "not used",
+    "linkedIn": "required"
+  },
+  "customFields": {
+    "title": {
+      "display": "input",
+      "type": "text",
+      "default": ""
+    },
+    "summary": {
+      "display": "textarea",
+      "type": "text",
+      "default": ""
+    }
+  }
+}
