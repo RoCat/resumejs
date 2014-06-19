@@ -53,9 +53,29 @@
                 </div>
             </div>
         </div>
+        <div id="preview">
+            <div class="wrapper">
+                <div class="githubContainer">
+                    <div class="title">My Github projects</div>
+                    {#.scrappers.githubData.projects}
+                        <div class="projectContainer">
+                            <div class="name">{.name|s}</div>
+                            <div class="description">{.description|s}</div>
+                            <div class="owner">{.owner.login|s}</div>
+                            <div class="stars">{.stargazers_count|s}</div>
+                        </div>
+                    {/.scrappers.githubData.projects}
+                </div>
+                <div class="twitterContainer">
+                    <div class="title">Twitter activity</div>
+                    <div class="projectContainer"></div>
+                </div>
+            </div>
+        </div>
 {/body}
 {<initScript}
         <script>
-            var scrappers.linkedInData = {.scrappers.linkedInData|js|s};
+            var scrappers = {};
+            scrappers = {.scrappers|js|s};
         </script>
 {/initScript}
