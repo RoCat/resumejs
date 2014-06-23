@@ -1,0 +1,6 @@
+{>"themes/normal/layout/normal" /}
+
+{<body}
+    <h1>503 error in there !</h1>
+    <p>Try again later</p>
+{/body}

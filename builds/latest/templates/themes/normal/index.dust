@@ -1,0 +1,83 @@
+{>"themes/normal/layout/normal" /}
+{<customCss }
+    <link rel="stylesheet" href="css/themes/normal/normal.css" />
+{/customCss}
+{<body}
+        <div id="presentation">
+            <div class="wrapper">
+                <div class="img_container">
+
+                </div>
+                <div id="presentation_summary">
+                    <div class="title">
+                        {themeData.customFields.title.value|s}
+                    </div>
+                    <div class="subtitle">
+                        {themeData.customFields.subtitle.value|s}
+                    </div>
+                    <div class="summary">
+                        {themeData.customFields.summary.value|s}
+                    </div>
+                    <div class="smartButton">
+                        My Resume
+                        <div class="shadowRight"></div>
+                    </div>
+                </div>
+                <div id="presentation_contact">
+                    <div class="websites">
+                        <label>Websites</label>
+                        <p>
+                            {#.scrappers.linkedInData.memberUrlResources.values}
+                            <a href="{.url|s}">{.url|s}</a><br />
+                            {/.scrappers.linkedInData.memberUrlResources.values}
+                        </p>
+                    </div>
+                    <div class="Email">
+                        <label>Email</label>
+                        {.scrappers.linkedInData.emailAddress|s}
+                    </div>
+                    <div class="cell">
+                        <label>Cell</label>
+                        {#scrappers.linkedInData.phoneNumbers.values}
+                        <div class="phoneAsset">{.phoneNumber|s} ( {scrappers.linkedInData.phoneNumbers.values[0].phoneType|s} )</div>
+                        {/scrappers.linkedInData.phoneNumbers.values}
+                    </div>
+                    <div class="social">
+                        <label>Social links</label>
+                        {?.adminData.facebook}<a href="{.adminData.facebook}"><img src="images/facebook.png"/></a>{/.adminData.facebook}
+                        {?.adminData.twitter}<a href="{.adminData.twitter}"><img src="images/twitter.png"/></a>{/.adminData.twitter}
+                        {?.adminData.google}<a href="{.adminData.google}"><img src="images/google.png"/></a>{/.adminData.google}
+                        {?.adminData.github}<a href="{.adminData.github}"><img src="images/github.png"/></a>{/.adminData.github}
+                        {?.scrappers.linkedInData.publicProfileUrl}<a href="{.scrappers.linkedInData.publicProfileUrl}"><img src="images/in.png"/></a>{/.scrappers.linkedInData.publicProfileUrl}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="preview">
+            <div class="wrapper">
+                <div class="githubContainer">
+                    <div class="title">My Github projects</div>
+                    {#.scrappers.githubData.projects}
+                        <div class="projectContainer">
+                            <div class="name">{.name|s}</div>
+                            <div class="description">{.description|s}</div>
+                            <div class="owner">{.owner.login|s}</div>
+                            <div class="stars">{.stargazers_count|s}</div>
+                        </div>
+                    {/.scrappers.githubData.projects}
+                </div>
+                <div class="twitterContainer">
+                    <div class="title">Twitter activity</div>
+                    <div class="projectContainer"></div>
+                </div>
+            </div>
+        </div>
+{/body}
+{<initScript}
+        <script>
+            var scrappers = {};
+            scrappers = {.scrappers|js|s};
+            var themeData = {};
+            themeData = {.themeData|js|s};
+        </script>
+{/initScript}

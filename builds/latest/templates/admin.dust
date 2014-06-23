@@ -1,0 +1,109 @@
+{>"layouts/master" /}
+
+{<body}
+    <div id="admin">
+        <div class="wrapper">
+            <form method="POST" action="/admin">
+                <div id="adminTheme">
+                    <label>Selected theme <span class="required">*</span></label>
+                    <select id="selectedTheme" required name="theme">
+                        {#.themes}
+                        <option  {@eq key=. value=adminData.theme } selected {/eq} value="{.}">{.}</option>
+                        {/.themes}
+                    </select>
+                </div>
+            <div id="col1">
+                <div class="title">Scrappers: </div>
+                <div id="scrappers">
+                    {#.scrappersNames}
+                        <label>
+                            {.} {@scrapperIsNeeded scrappers="{themeData.usedScrappers|js|s}" name="{.}" /}
+                        </label>
+                        refreshed: {@getLastActualisation scrappers="{scrappers|js|s}" name="{.}" /}  -
+                        <span id="refresh"><a href="/getScrapperData?scrapper={.}&initialUrl=/admin">refresh</a></span> <br />
+                    {/.scrappersNames}
+                </div>
+            </div>
+            <div id="col2">
+                <div class="title">Theme custom fields: </div>
+                <div id="customFields">
+                    {#.themeData.customFieldsArray}
+                        <label>{.name|a}</label>
+                        {@displayField field="{.|js|s}" /}<br />
+                    {/.themeData.customFieldsArray}
+                </div>
+            </div>
+            <div id="col3">
+                <label>facebook</label>
+                <input type="text" name="facebook" value="{adminData.facebook}"/><br />
+                <label>twitter</label>
+                <input type="text" name="twitter" value="{adminData.twitter}"/><br />
+                <label>github</label>
+                <input type="text" name="github" value="{adminData.github}"/>
+                <input type="hidden" name="_csrf" value="{_csrf}" />
+            </div>
+            <div class="clearboth"></div>
+            <div class="smartButton">
+                Submit
+                <div class="shadowRight"></div>
+            </div>
+            </form>
+        </div>
+        <div class="clearBoth"></div>
+    </div>
+    <script>
+        $(".smartButton").on("click", function(){
+            var form = $(this).parents("form");
+            var returnArr = [];
+            getEmptyRequired(form, returnArr);
+            if(returnArr.length>0){
+                for(var key in returnArr){
+                    $(returnArr[key]).css('border-color', 'red');
+                }
+            } else {
+                form.submit();
+            }
+        });
+        function getEmptyRequired(elem, returnArr){
+            if($(elem).attr('required') && !$(elem).val()){
+                returnArr.push(elem);
+            }
+            var children = [];
+            if(elem && typeof elem.children === "function")
+            {
+                children = elem.children();
+            } else {
+                children = elem.children;
+            }
+            if(children.length>0){
+                for(var elemKey = 0; elemKey < children.length; elemKey++){
+                    getEmptyRequired(children[elemKey], returnArr);
+                }
+            }
+        }
+        $("#selectedTheme").on("change", function(){
+            var theme = this.value;
+            $.ajax({url:"/themeData?theme="+theme}).done(function(themeData){
+                $("#customFields").html("");
+                for(var fieldKey in themeData.customFields){
+                    var field = themeData.customFields[fieldKey];
+                    $("#customFields").append('<label>'+field.name+'</label>');
+                    if(field.display === 'input'){
+                        rez = '<input required type="'+field.type+'" name="themeCustomField_'+field.name+'" value="'+field.value+'"/>';
+                    } else {
+                        rez = '<textarea required name="themeCustomField_'+field.name+'">'+field.value+'</textarea>';
+                    }
+                    $("#customFields").append(rez);
+                }
+                $(".scrapperIsRequired").css('display','none');
+                for(var scrapperKey in themeData.usedScrappers){
+                    if(themeData.usedScrappers[scrapperKey] === "required"){
+                        $("#scrapperIsRequired_"+scrapperKey).css('display','inline');
+                    }
+                }
+            })
+        });
+        var themeData = {};
+        themeData = {.themeData|js|s};
+    </script>
+{/body}

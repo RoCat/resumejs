@@ -1,0 +1,461 @@
+#page {
+  max-width: 1280px;
+  margin: auto;
+  margin-top: 75px;
+  position: relative;
+}
+#header {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 155px;
+  min-width: 745px;
+  -webkit-background-clip: border-box;
+  -webkit-background-origin: padding-box;
+  -webkit-background-size: auto;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px -1px 1px 0px inset, rgba(0, 0, 0, 0.6) 0px 0px 5px 0px;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: #000000;
+  background-image: url(/images/themes/normal/bevel_300.png);
+  background-origin: padding-box;
+  background-size: auto;
+}
+.clearboth {
+  clear: both;
+}
+#header .active > a {
+  background-color: transparent;
+  color: #89bc23;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#header_content {
+  max-width: 980px;
+  margin: auto;
+  position: relative;
+  height: 155px;
+}
+#header_navBar {
+  position: absolute;
+  bottom: -45px;
+  width: 100%;
+}
+#header_firstName {
+  margin-top: 35px;
+  margin-left: 35px;
+  float: left;
+  font-size: 51px;
+  font-weight: bold;
+  color: #92dd0f;
+  font-family: 'open sans', sans-serif;
+}
+#header_lastName {
+  margin-top: 35px;
+  margin-left: 15px;
+  float: left;
+  font-size: 51px;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'open sans', sans-serif;
+}
+#header_headline {
+  float: left;
+  margin-top: 70px;
+  margin-left: 15px;
+  font-size: 15px;
+  color: #ffffff;
+  font-family: 'open sans', sans-serif;
+}
+#header_navbar_shadowRight {
+  position: absolute;
+  right: 0px;
+  bottom: -50px;
+  width: 165px;
+  height: 26px;
+  -webkit-background-clip: border-box;
+  -webkit-background-origin: padding-box;
+  -webkit-background-size: auto;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(/images/themes/normal/liftedshadow_medium.png);
+  background-origin: padding-box;
+  background-size: auto;
+  background-position: 100% 0px;
+}
+#header_navbar_shadowLeft {
+  position: absolute;
+  bottom: -50px;
+  width: 165px;
+  height: 26px;
+  -webkit-background-clip: border-box;
+  -webkit-background-origin: padding-box;
+  -webkit-background-size: auto;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(/images/themes/normal/liftedshadow_medium.png);
+  background-origin: padding-box;
+  background-size: auto;
+  background-position: 0px 0px;
+}
+.navbar {
+  background: url(/images/themes/normal/shiny2button_bg.png) 50% 100% repeat-x #ffffff;
+}
+#presentation {
+  margin-top: 15px;
+  width: 100%;
+  height: 420px;
+  background-color: #f8f8f8;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgba(154, 154, 154, 0.45);
+}
+#personnal_information {
+  margin-top: 215px;
+  width: 100%;
+  height: 220px;
+  background-color: #f8f8f8;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgba(154, 154, 154, 0.45);
+}
+#resume {
+  position: relative;
+}
+#resume #leftPart {
+  max-width: 675px;
+  min-width: 510px;
+  width: 68%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin-bottom: 50px;
+}
+#resume #rightPart {
+  width: 235px;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+#resume #rightPart .textBlock {
+  width: 100%;
+  margin-top: 41px;
+  color: #494949;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'open sans', sans-serif;
+}
+.social img {
+  margin-right: 5px;
+}
+#resume #rightPart .title {
+  font-family: 'open sans', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #89bc23;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid;
+  border-color: rgba(154, 154, 154, 0.45);
+  padding-bottom: 10px;
+}
+#resume #leftPart .subtitle {
+  font-family: 'open sans', sans-serif;
+  margin-top: 15px;
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #89bc23;
+}
+#resume #leftPart .title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid;
+  border-color: rgba(154, 154, 154, 0.45);
+  padding-bottom: 10px;
+  font-family: 'Open Sans';
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+#resume #leftPart .textBlock {
+  width: 100%;
+  padding-left: 5px;
+  margin-top: 35px;
+  color: #494949;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'open sans', sans-serif;
+}
+#resume #leftPart .textBlock .job_description {
+  padding-left: 25px;
+}
+#resume #leftPart .textBlock .date {
+  margin-bottom: 15px;
+}
+#resume #rightPart .textBlock {
+  width: 100%;
+  color: #494949;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'open sans', sans-serif;
+}
+#personnal_information #firstName {
+  margin-left: 10px;
+  float: left;
+  font-size: 44px;
+  font-weight: normal;
+  color: #89bc23;
+  font-family: 'open sans', sans-serif;
+}
+#personnal_information #lastName {
+  float: left;
+  font-size: 44px;
+  font-weight: normal;
+  color: #89bc23;
+  font-family: 'open sans', sans-serif;
+}
+#personnal_information .img_container {
+  margin-top: 0px;
+  margin-left: 0px;
+  float: right;
+  width: 230px;
+  height: 100%;
+  border-left: 1px solid;
+  border-color: rgba(154, 154, 154, 0.45);
+}
+#personnal_information .text_container {
+  float: left;
+  max-width: 640px;
+  min-width: 505px;
+  height: 100%;
+  color: #494949;
+  padding-left: 35px;
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'open sans', sans-serif;
+}
+#personnal_information .text_container .phoneAsset {
+  margin-left: 25px;
+}
+#personnal_information .img_container img {
+  width: 100%;
+  height: 100%;
+}
+#presentation .img_container {
+  margin-top: 35px;
+  margin-left: 35px;
+  float: left;
+  width: 350px;
+  height: 350px;
+  border: 1px solid;
+  border-color: rgba(154, 154, 154, 0.45);
+}
+#page {
+  position: relative;
+  margin-top: 200px;
+  max-width: 980px;
+  min-width: 745px;
+}
+#presentation_summary {
+  width: 350px;
+  padding-right: 50px;
+  float: left;
+  margin-left: 35px;
+  margin-top: 35px;
+}
+#presentation_contact {
+  width: 200px;
+  float: left;
+  margin-top: 35px;
+  font-family: 'open sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  height: auto;
+  line-height: 18.200000762939453px;
+}
+#presentation_summary .title {
+  line-height: 0.9em;
+  font-family: 'open sans', sans-serif;
+  font-size: 70px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  color: #89bc23;
+}
+#presentation_summary .subtitle {
+  line-height: normal;
+  font-family: 'open sans', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #89bc23;
+}
+#presentation_summary .summary {
+  font-family: 'open sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #494949;
+  margin-top: 20px;
+  height: 180px;
+}
+#presentation_contact label {
+  font-family: 'open sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #89bc23;
+  line-height: 18.200000762939453px;
+  display: block;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.smartButton {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: inline-block;
+  background-color: #88bb23;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-duration: 0.2s;
+  -moz-transition-timing-function: ease-in;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in;
+  font-family: 'open sans', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  height: 30px;
+  line-height: 30px;
+  color: #FFF;
+  cursor: pointer;
+}
+.smartButton:hover {
+  background-color: #5b7d17;
+}
+.shadowRight {
+  width: 165px;
+  height: 26px;
+  -webkit-background-clip: border-box;
+  -webkit-background-origin: padding-box;
+  -webkit-background-size: auto;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(/images/themes/normal/liftedshadow_medium.png);
+  background-origin: padding-box;
+  background-size: auto;
+  background-position: 100% 0px;
+}
+.smartButton .shadowRight {
+  position: absolute;
+  bottom: -26px;
+  right: -20px;
+}
+#presentation_summary .smartButton {
+  margin-top: 10px;
+  position: absolute;
+  margin-left: 180px;
+}
+.websites {
+  width: 200px;
+  overflow: hidden;
+}
+#preview {
+  margin-top: 15px;
+  width: 100%;
+}
+.githubContainer {
+  height: 420px;
+  background-color: #f8f8f8;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgba(154, 154, 154, 0.45);
+  width: 695px;
+  float: left;
+}
+.twitterContainer {
+  height: 420px;
+  background-color: #f8f8f8;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgba(154, 154, 154, 0.45);
+  width: 270px;
+  float: right;
+}
+.projectContainer {
+  width: 215px;
+  float: left;
+  margin-left: 12px;
+  margin-top: 5px;
+  padding: 5px;
+  border: 1px solid rgba(154, 154, 154, 0.45);
+  color: #494949;
+  font-family: 'open sans', sans-serif;
+}
+.projectContainer .name {
+  font-family: 'open sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+#preview .title {
+  font-family: 'open sans', sans-serif;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  color: #89bc23;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/themes/normal/opensans-regular-webfont.eot');
+  src: url('/fonts/themes/normal/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/themes/normal/opensans-regular-webfont.woff') format('woff'), url('/fonts/themes/normal/opensans-regular-webfont.ttf') format('truetype'), url('/fonts/themes/normal/opensans-regular-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/themes/normal/opensans-bold-webfont.eot');
+  src: url('/fonts/themes/normal/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/themes/normal/opensans-bold-webfont.woff') format('woff'), url('/fonts/themes/normal/opensans-bold-webfont.ttf') format('truetype'), url('/fonts/themes/normal/opensans-bold-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/themes/normal/opensans-italic-webfont.eot');
+  src: url('/fonts/themes/normal/opensans-italic-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/themes/normal/opensans-italic-webfont.woff') format('woff'), url('/fonts/themes/normal/opensans-italic-webfont.ttf') format('truetype'), url('/fonts/themes/normal/opensans-italic-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: url('/fonts/themes/normal/opensans-bolditalic-webfont.eot');
+  src: url('/fonts/themes/normal/opensans-bolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/themes/normal/opensans-bolditalic-webfont.woff') format('woff'), url('/fonts/themes/normal/opensans-bolditalic-webfont.ttf') format('truetype'), url('/fonts/themes/normal/opensans-bolditalic-webfont.svg#open_sansregular') format('svg');
+}
