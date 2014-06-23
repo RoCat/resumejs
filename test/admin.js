@@ -8,8 +8,9 @@ var app = require('../index'),
     request = require('supertest'),
     express = require('express'),
     assert = require('assert'),
-    jsdom = require("jsdom");
-
+    jsdom = require("jsdom"),
+    path = require('path');
+var config = require(path.resolve('./config/customConfig.json'));
 
 describe('admin', function () {
 
@@ -56,7 +57,7 @@ describe('admin', function () {
                     }else {
                         authenticatedCookie = res.headers['set-cookie'];
                         jsdom.env(res.text, ["http://code.jquery.com/jquery.js"], function(err, window){
-                            var postData = {'_csrf':window.$("#csrf").attr('value'), 'login':'admin', 'password':'rMickeyaide1986t'};
+                            var postData = {'_csrf':window.$("#csrf").attr('value'), 'login':config.admin.login, 'password':config.admin.password};
                             authenticatedRequest
                                 .post('/login')
                                 .set('cookie', authenticatedCookie)
@@ -87,10 +88,7 @@ describe('admin', function () {
                 .get('/admin')
                 .set('cookie', authenticatedCookie)
                 .expect(200)
-                .expect(/.*<label>summary <span class="required">\*<\/span><\/label><textarea required name="summary">.*/)
-                .expect(/.*<label>Selected template <span class="required">\*<\/span><\/label>.*/)
-                .expect(/.*<label>subtitle <span class="required">\*<\/span><\/label><input required type="text" name="subtitle" value=".*/)
-                .expect(/.*<label>title <span class="required">\*<\/span><\/label><input required type="text" name="title" value=".*/)
+                .expect(/.*<label>Selected theme <span class="required">\*<\/span><\/label>.*/)
                 .end(function(err, res){
                     done(err);
                 });

@@ -3,6 +3,9 @@
     "github": "required",
     "linkedIn": "required"
   },
+  "staticPagesToGenerate": [
+    "/","/login","/resume", "/admin"
+  ],
   "customFields": {
     "title": {
       "display": "input",

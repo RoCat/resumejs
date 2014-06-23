@@ -26,7 +26,10 @@
     "mongoose": "^3.8.9",
     "common-dustjs-helpers": "^0.1.0",
     "moment": "^2.6.0",
-    "jsdom": "^0.10.5"
+    "jsdom": "^0.10.5",
+    "wrench": "^1.5.8",
+    "fs-extra": "^0.9.1",
+    "async": "^0.9.0"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
