@@ -22,7 +22,6 @@ module.exports = function (app) {
       model.adminData = adminLib.getStoredData();
 
       themeLib.getThemeData(model.adminData.theme, function(err, themeData){
-        console.log(themeData);
         if(!err){
           model.themeData = themeData;
         }
@@ -99,7 +98,7 @@ module.exports = function (app) {
       var scrapper = scrappers.getScrapper(pScrapper);
       if(scrapper.isOauth){
         if(req.session[pScrapper+'_token']){
-          scrapper.getData(req.session.linkedIn_token, function(err, scrapperData){
+          scrapper.getData(req.session, function(err, scrapperData){
             scrapper.storeData(scrapperData, function (err) {
               if(err) {
                 res.send(err);

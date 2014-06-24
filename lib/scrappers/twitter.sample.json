@@ -1,0 +1,5 @@
+{
+    "consumerKey": "00000000000000",
+    "consumerSecret": "0000000000000",
+    "callbackUrl": "http%3A%2F%2Fexample.com%3A8000%2FauthCallback?scrapper=twitter"
+}

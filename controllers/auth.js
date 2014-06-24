@@ -7,7 +7,6 @@ module.exports = function (app) {
     if(req.session.isAdmin){
       var scrappers = require('../lib/scrappers.js');
       var scrapper = scrappers.getScrapper(req.query.scrapper);
-      console.log(scrapper);
       if(typeof scrapper === 'object' && typeof scrapper.auth === 'function'){
         scrapper.auth(req, res);
       } else {

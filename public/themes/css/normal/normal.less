@@ -10,6 +10,10 @@
   margin:auto;
   margin-top: 75px;
   position:relative;
+  margin-bottom:10px;
+}
+#footer {
+  height:100px;
 }
 #header {
   position: absolute;
@@ -418,7 +422,8 @@
 }
 
 .githubContainer {
-  height:420px;
+  max-height:450px;
+  overflow:hidden;
   background-color: rgb(248, 248, 248);
   border: 1px solid;
   border-radius:5px;
@@ -428,7 +433,7 @@
 }
 
 .twitterContainer {
-  height:420px;
+  min-height:420px;
   background-color: rgb(248, 248, 248);
   border: 1px solid;
   border-radius:5px;
@@ -439,13 +444,32 @@
 
 .projectContainer {
   width:215px;
+  height:125px;
   float:left;
   margin-left:12px;
-  margin-top:5px;
+  margin-bottom:10px;
   padding:5px;
   border:1px solid @borderGrey;
   color:@grey;
   font-family: 'open sans', sans-serif;
+  position: relative;
+  overflow:hidden;
+}
+
+.projectContainer .stars {
+  position: absolute;
+  top: 2px;
+  right: 7px;
+}
+
+.projectContainer .owner {
+  text-align: right;
+  padding-right:5px;
+}
+
+.projectContainer .description {
+  height:70px;
+  overflow:hidden;
 }
 
 .projectContainer .name {
@@ -460,12 +484,26 @@
 #preview .title {
   font-family: 'open sans', sans-serif;
   margin-top:10px;
+  margin-bottom:10px;
   font-size: 20px;
   text-align:center;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
   color: @fontgreen;
+}
+
+.twitterContainer .projectContainer {
+  width:245px;
+}
+.twitterContainer .projectContainer .author {
+  position: absolute; bottom:5px;
+}
+.twitterContainer .projectContainer .date {
+  position: absolute; bottom:5px;right:5px;
+}
+.twitterContainer .projectContainer .text {
+  width:245px;
 }
 
 @font-face {

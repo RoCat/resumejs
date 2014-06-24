@@ -30,6 +30,7 @@ config.app.json
 config/customConfig.json
 lib/scrappers/github.json
 lib/scrappers/linkedIn.json
+lib/scrappers/twitter.json
 
 builds/*
 
