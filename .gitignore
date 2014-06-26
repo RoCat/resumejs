@@ -32,5 +32,9 @@ lib/scrappers/github.json
 lib/scrappers/linkedIn.json
 lib/scrappers/twitter.json
 
+#data files
+data/adminData.sjon
+
+public/themes/data/*/data.json
 builds/*
 
