@@ -34,7 +34,7 @@ lib/scrappers/twitter.json
 
 #data files
 data/adminData.sjon
-
+*Data.json
 public/themes/data/*/data.json
 builds/*
 
