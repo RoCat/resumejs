@@ -58,12 +58,26 @@
                 <div class="githubContainer">
                     <div class="title">My Github projects</div>
                     {#.scrappers.githubData.projects}
+                        {^.fork}
+                            <div class="projectContainer">
+                                <div class="name">{.name|s}</div>
+                                <div class="description">{.description|s}</div>
+                                <div class="owner">{.owner.login|s}</div>
+                                <div class="stars"><span class="glyphicon glyphicon-star"></span>{.stargazers_count|s}</div>
+                            </div>
+                        {/.fork}
+                    {/.scrappers.githubData.projects}
+                    <div style="clear: both;"></div>
+                    <div class="title">Github forked projects</div>
+                    {#.scrappers.githubData.projects}
+                    {?.fork}
                     <div class="projectContainer">
                         <div class="name">{.name|s}</div>
                         <div class="description">{.description|s}</div>
                         <div class="owner">{.owner.login|s}</div>
                         <div class="stars"><span class="glyphicon glyphicon-star"></span>{.stargazers_count|s}</div>
                     </div>
+                    {/.fork}
                     {/.scrappers.githubData.projects}
                 </div>
                 <div class="twitterContainer">
@@ -72,7 +86,7 @@
                         <div class="projectContainer">
                             <div class="author">by <b>{?.retweeted_status}{.retweeted_status.user.name}{:else}{.user.name}{/.retweeted_status}</b></div>
                             <div class="date">{@getDateToNow date="{.created_at}" /}</div>
-                            <div class="text">{.text}</div>
+                            <div class="text">{.text|s}</div>
                         </div>
                     {/.scrappers.twitterData.user_timeline}
                 </div>

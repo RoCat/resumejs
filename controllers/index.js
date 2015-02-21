@@ -20,7 +20,7 @@ module.exports = function (app) {
     model.page = themedController;
     var themeLib = require('../lib/theme.js');
     var themedView = themeLib.getThemedView(themedController, app.settings);
-    themeLib.getThemeData(model.adminData.theme, function(err,themeData){
+    themeLib.getThemeData(model.adminData.theme, true, function(err,themeData){
       model.themeData = themeData;
       res.render(themedView, model);
     });
@@ -48,7 +48,7 @@ module.exports = function (app) {
     if(!theme){
       theme = adminLib.getStoredData(true).theme;
     }
-    themeLib.getThemeData(theme, function(err,themeData){
+    themeLib.getThemeData(theme, true, function(err,themeData){
       if(err){
         themeData = {'error':'This theme does not exist or have no data.'};
       }
