@@ -1,6 +1,7 @@
 'use strict';
 var logModel = require('../models/log');
-
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function (app) {
 
@@ -8,6 +9,7 @@ module.exports = function (app) {
 
 
   app.get('/', function (req, res) {
+    var themeLib = require('../lib/theme.js');
     var scrappers = require('../lib/scrappers.js');
     model.scrappers = scrappers.getScrappersData();
     var adminLib = require('../lib/admin.js');
@@ -17,13 +19,35 @@ module.exports = function (app) {
     if(!themedController){
       themedController = 'index';
     }
+
+
+    //fix problem when we have query params
+    var splitedController = themedController.split('?');
+    themedController = splitedController[0];
+
     model.page = themedController;
-    var themeLib = require('../lib/theme.js');
-    var themedView = themeLib.getThemedView(themedController, app.settings);
-    themeLib.getThemeData(model.adminData.theme, true, function(err,themeData){
-      model.themeData = themeData;
-      res.render(themedView, model);
-    });
+    model.queryData = req.query;
+    model.postData = req.post;
+
+    var theme = model.adminData.theme;
+    //get custom controller if any
+    if(app.customControllers
+      && app.customControllers[theme]
+      && app.customControllers[theme][themedController]
+      //controller found, now check if there is something for this method
+      && app.customControllers[theme][themedController][req.method.toLowerCase()]
+    ){
+        //method is found, run it instead of next one
+      req.model = model;
+      req.themedController = themedController;
+      app.customControllers[theme][themedController][req.method.toLowerCase()](req,res);
+    } else {
+      var themedView = themeLib.getThemedView(themedController, app.settings);
+      themeLib.getThemeData(model.adminData.theme, true, function(err,themeData){
+        model.themeData = themeData;
+        res.render(themedView, model);
+      });
+    }
   });
 
   app.get('/scrapperData', function (req, res) {

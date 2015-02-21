@@ -1,13 +1,16 @@
 'use strict';
-
+global.__root = __dirname;
 
 var kraken = require('kraken-js'),
     express = require('express'),
-    app = {};
+    app = {},
+    fs = require('fs'),
+    path = require('path');
 
 
-app.configure = function configure(nconf, next) {
+app.configure = function configure(server, next) {
     // Async method run on startup.
+
     next(null);
 };
 
@@ -20,6 +23,22 @@ app.requestStart = function requestStart(server) {
 
 app.requestBeforeRoute = function requestBeforeRoute(server) {
     // Run before any routes have been added.
+
+    //get custom controller if any
+    var customControllersDir = path.resolve(__dirname+'/controllers/themes/');
+    server.customControllers = [];
+    var themes = fs.readdirSync(customControllersDir);
+    themes.forEach(function(theme){
+        server.customControllers[theme] = [];
+        var customControllersDirByTheme  = fs.readdirSync(customControllersDir+"/"+theme);
+        customControllersDirByTheme.forEach(function(customController){
+            //remove the extension
+            customController = customController.replace(/\.[^/.]+$/, "");
+            var customControllerPath = customControllersDir+"/"+theme+"/"+customController;
+            server.customControllers[theme][customController] = require(customControllerPath)(server);
+        });
+    });
+
     server.customConfig = require('./config/customConfig.json');
     var scrappers = require('./lib/scrappers.js');
     server.customConfig.scrappers = scrappers.getScrappersConfig();

@@ -2,6 +2,9 @@
 @fontgreen: rgb(137, 188, 35);
 @grey: rgb(73, 73, 73);
 @borderGrey: rgba(154, 154, 154, 0.45);
+@fontgrey: rgb(100, 100, 100);
+@fontdarkgrey: rgb(70, 70, 70);
+@fontshadow: rgba(10,10,10,0.2);
 @smartButton_on: rgb(136, 187, 35);
 @smartButton_off: rgb(91, 125, 23);
 
@@ -432,6 +435,32 @@
   float:left;
 }
 
+.articleContainer {
+  max-height:450px;
+  padding:10px;
+  position:relative;
+  overflow:hidden;
+  background-color: rgb(248, 248, 248);
+  border: 1px solid;
+  border-radius:5px;
+  border-color: @borderGrey;
+  width: 695px;
+  margin-bottom:50px;
+  float:left;
+  -moz-box-shadow: 7px 5px 15px 0px #757575;
+  -webkit-box-shadow: 7px 5px 15px 0px #757575;
+  -o-box-shadow: 7px 5px 15px 0px #757575;
+  box-shadow: 7px 5px 15px 0px #757575;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#757575, Direction=125, Strength=15);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.articlesContainer {
+  float:left;
+}
+
 .twitterContainer {
   min-height:420px;
   background-color: rgb(248, 248, 248);
@@ -440,6 +469,25 @@
   border-color: @borderGrey;
   width: 270px;
   float:right;
+}
+
+
+.categoriesContainer {
+  min-height:420px;
+  text-align: center;
+  background-color: rgb(248, 248, 248);
+  width: 240px;
+  float:right;
+}
+
+.categoriesContainer a:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.categoriesContainer a:visited {
+  text-decoration: inherit;
+  color: inherit;
 }
 
 .projectContainer {
@@ -491,6 +539,55 @@
   font-variant: normal;
   font-weight: normal;
   color: @fontgreen;
+}
+
+#preview  .categoriesContainer .title {
+  border-bottom: 1px solid @fontgreen;
+  margin:10px;
+  margin-left:50px;
+  margin-right:50px;
+}
+
+#preview  .categoriesContainer .category {
+  color: @fontgrey;
+  font-size:15px;
+  margin-top:10px;
+}
+
+#preview  .articleContainer .title {
+  font-size: 35px;
+  margin-top:5px;
+  font-weight: bold;
+  color: @fontgreen;
+}
+
+#preview  .articleContainer .content {
+  margin-bottom:30px;
+  margin-top:20px;
+}
+
+#preview  .articleContainer .footer {
+  position: absolute;
+  bottom: 5px;
+  right:15px;
+  font-size:10px;
+  color: @fontgrey;
+}
+
+#preview  .articleContainer .author {
+  font-weight:bold;
+}
+
+#preview  .articleContainer .category {
+   font-weight:bold;
+ }
+
+#preview  .articleContainer .publicationDate {
+  position:absolute;
+  top:10px;
+  right:10px;
+  font-size:12px;
+  color: @fontgrey;
 }
 
 .twitterContainer .projectContainer {
