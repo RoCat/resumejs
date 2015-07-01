@@ -40,5 +40,5 @@ public/themes/data/*/data.json
 builds/*
 public/themes/data/*/*.md
 public/data/*.json
-.idea/*
+.idea/workspace.xml
 
