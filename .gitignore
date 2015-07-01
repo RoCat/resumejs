@@ -38,4 +38,5 @@ data/twitterData.json
 data/*Data.json
 public/themes/data/*/data.json
 builds/*
-
+public/themes/data/*/*.md
+piblic/data/*.json
