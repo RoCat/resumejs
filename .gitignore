@@ -38,7 +38,8 @@ data/twitterData.json
 data/*Data.json
 public/themes/data/*/data.json
 builds/*
-public/themes/data/*/*.md
+public/themes/data/*/blog/*.md
 public/data/*.json
 .idea/workspace.xml
+*-old
 

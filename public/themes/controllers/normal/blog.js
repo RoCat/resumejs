@@ -9,6 +9,10 @@ module.exports = function(app){
     get: function(req, res){
       var themeLib = require(global.__root+'/lib/theme.js');
 
+      var isApi = req.query.isApi;
+      var requestedCategory = req.query.category;
+      var requestedArticle = req.query.article;
+
       var model = req.model;
       var themedController = req.themedController;
       var theme = model.adminData.theme;
@@ -35,8 +39,8 @@ module.exports = function(app){
           articleObj.content = marked(fs.readFileSync(articlesDir+'/'+article, 'utf8')).replace('\n', '<br />');
           if(articleObj.publicationDate <= Date.now()/1000) {
             categories.push(articleObj.category.charAt(0).toUpperCase() + articleObj.category.slice(1));
-            if (!articleObj.category || !req.query.category
-              || req.query.category.toLowerCase() === articleObj.category.toLowerCase()) {
+            if (!articleObj.category || !requestedCategory || requestedCategory === "list"
+              || requestedCategory.toLowerCase() === articleObj.category.toLowerCase()) {
               articleObj.publicationDate = moment(new Date(articleObj.publicationDate * 1000)).fromNow();
               articleObj.title = articleObj.title.charAt(0).toUpperCase() + articleObj.title.slice(1);
               articles.push(articleObj);
@@ -49,8 +53,30 @@ module.exports = function(app){
       var themedView = themeLib.getThemedView(themedController, app.settings);
       themeLib.getThemeData(model.adminData.theme, true, function(err,themeData){
         model.themeData = themeData;
-        console.log(model.articles);
-        res.render(themedView, model);
+        if(!isApi){
+          res.render(themedView, model);
+        } else {
+          var returnObj = articles;
+          if(requestedArticle){
+            returnObj = articles[requestedArticle];
+          } else {
+            if(requestedCategory){
+              if(requestedCategory === "list"){
+                var allCategories = lodash.countBy(articles,"category");
+                returnObj = [];
+                for(var categoryKey in allCategories){
+                  returnObj.push({name: categoryKey, count: allCategories[categoryKey]});
+                }
+              } else {
+                returnObj = articles;
+              }
+            } else {
+              returnObj = articles;
+            }
+          }
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.send(returnObj);
+        }
       });
     }
   };
