@@ -10,27 +10,37 @@
                 </div>
                 <div class="text_container">
                     <div id="lastName">
-                        {scrappers.linkedInData.lastName}
+                        {scrappers.linkedInData.lastname}
                     </div>
                     <div id="firstName">
-                        {scrappers.linkedInData.firstName}
+                        {scrappers.linkedInData.firstname}
                     </div>
                     <div class="clearboth"></div>
-                    <div id="birthDate"><b>Date de naissance:</b> {@lt key=scrappers.linkedInData.dateOfBirth.day value="10"}0{/lt}{scrappers.linkedInData.dateOfBirth.day}/
-                        {@lt key=scrappers.linkedInData.dateOfBirth.month value="10"}0{/lt}{scrappers.linkedInData.dateOfBirth.month}/
-                        {scrappers.linkedInData.dateOfBirth.year}
+                    <div id="birthDate"><b>Date de naissance:</b> {.scrappers.doyoubuzzData.resume.resume.userInformation.birthdate|s}
                     </div>
                     <div id="address">
-                        <b>Adresse:</b> {scrappers.linkedInData.mainAddress|s}
+                        <b>Adresse: </b>
+                        {# scrappers.doyoubuzzData.resume.resume.contacts.contact }
+                            {@eq key=type value="address"}
+                                {^ .value.city }
+                                {value.address}
+                                {/ .value.city }
+                            {/eq}
+                        {/ scrappers.doyoubuzzData.resume.resume.contacts.contact }
+                        {scrappers.linkedInData.mainAddress|s}
                     </div>
                     <div id="email">
                         <b>E-mail:</b> {scrappers.linkedInData.emailAddress|s}
                     </div>
                     <div id="phone">
                         <b>Téléphones:</b>
-                        {#scrappers.linkedInData.phoneNumbers.values}
-                        <div class="phoneAsset">{.phoneNumber|s} ( {scrappers.linkedInData.phoneNumbers.values[0].phoneType|s} )</div>
-                        {/scrappers.linkedInData.phoneNumbers.values}
+                        {#.scrappers.doyoubuzzData.resume.resume.contacts.contact}
+                            {@eq key=type value="phone"}
+                                <div class="phoneAsset">
+                                    {.value|s}
+                                </div>
+                            {/eq}
+                        {/ scrappers.doyoubuzzData.resume.resume.contacts.contact }
                     </div>
                 </div>
             </div>
@@ -42,71 +52,81 @@
                     <div class="title">
                         Expériences profesionnelles:
                     </div>
-                    {#.scrappers.linkedInData.positions.values}
+                    {#.scrappers.doyoubuzzData.resume.resume.experiences.experience}
                     <div class="subtitle">
-                        {.title} - {.company.name}
+                        {.title} - {.company}
                     </div>
                     <div class="date">
-                        {startDate.year} - {?isCurrent} Aujourd'hui {:else} {endDate.year} {/isCurrent}
+                        {@getYear text="{start}"}{/getYear} - {@eq key=end value=""} Aujourd'hui {:else} {@getYear text="{start}"}{/getYear} {/eq}
                     </div>
                     <div class="job_description">
-                        {.summary|s}    ​
+                        {?description}{.description|s}<br />{/description}
+                        {#.missions.mission}
+                            {.description}<br />
+                        {/.missions.mission}
                     </div>
-                    {/.scrappers.linkedInData.positions.values}
+                    {/.scrappers.doyoubuzzData.resume.resume.experiences.experience}
                 </div>
                 <div class="textBlock">
                     <div class="title">
                         Etudes:
                     </div>
-                    {#.scrappers.linkedInData.educations.values}
+                    {#.scrappers.doyoubuzzData.resume.resume.educations.education}
                     <div class="subtitle">
-                        {.degree} {.fieldOfStudy} - {.schoolName}:
+                        {.degree} {.description} - {.school}:
                     </div>
                     <div class="date">
-                        {startDate.year} - {?isCurrent} Aujourd'hui {:else} {endDate.year} {/isCurrent}
+                        {@getYear text="{start}"}{/getYear} - {@eq key=end value=""} Aujourd'hui {:else} {@getYear text="{start}"}{/getYear} {/eq}
                     </div>
                     <div class="job_description">
                         {.notes|s}    ​
                     </div>
-                    {/.scrappers.linkedInData.educations.values}
+                    {/.scrappers.doyoubuzzData.resume.resume.educations.education}
                 </div>
                 <div class="textBlock">
                     <div class="title">
                         Centres d'intérêt:
                     </div>
                     <div class="job_description" style="margin-left:25px;">
-                        {.scrappers.linkedInData.interests|s}    ​
+                        {#.scrappers.doyoubuzzData.resume.resume.interests.interest}
+                            {.title|s}:<br />
+                            {#.children.interest}
+                                - {.title} <br />
+                            {/.children.interest}
+                        {/.scrappers.doyoubuzzData.resume.resume.interests.interest}
                     </div>
                 </div>
             </div>
             <div id="rightPart">
+                {#.scrappers.doyoubuzzData.resume.resume.skills.skill}
                 <div class="textBlock">
                     <div class="title">
-                        Langues:
+                        {.title}:
                     </div>
                     <div class="job_description">
-                        {#.scrappers.linkedInData.languages.values}
-                        <div>{.language.name}</div> <div>{.proficiency.name}</div><br />
-                        {/.scrappers.linkedInData.languages.values}
+                        {#.children.skill}
+                        <div>{.title}</div>
+                            <div class="progress" style="border: 1px dotted grey;border-radius:5px;">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{.level}"
+                                     aria-valuemin="0" aria-valuemax="100" style="width:{.level}%">
+                                    {?details} {.level}% {:else} {.level}% {/details}
+                                </div>
+                            </div>
+                        {else}
+                        {/.children.skill}
                     </div>
                 </div>
-                <div class="textBlock">
-                    <div class="title">
-                        Compétences:
-                    </div>
-                    <div class="job_description">
-                        {#.scrappers.linkedInData.skills.values}
-                        {.skill.name}<br />
-                        {/.scrappers.linkedInData.skills.values}
-                    </div>
-                </div>
+                {/.scrappers.doyoubuzzData.resume.resume.skills.skill}
             </div>
         </div>
 
 {/body}
 {<initScript}
         <script>
-            var scrappers.linkedInData = {.scrappers.linkedInData|js|s};
+            var scrappers = {};
+            scrappers = {.scrappers|js|s};
+            var themeData = {};
+            themeData = {.themeData|js|s};
         </script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

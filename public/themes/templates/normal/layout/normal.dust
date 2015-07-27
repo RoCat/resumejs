@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <title>{+title /}</title>
     <link rel="stylesheet" href="css/themes/normal/normal.css" />
-    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css" />
     {+customCss /}
     <script type="text/javascript" src="components/themes/normal/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="components/themes/normal/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="components/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="js/themes/normal/app.js"></script>
+    <script type="text/javascript" src="js/themes/normal/contact.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=0.51, user-scalable=no">
 </head>
 <body>

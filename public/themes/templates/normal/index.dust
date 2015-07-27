@@ -6,7 +6,10 @@
         <div id="presentation">
             <div class="wrapper">
                 <div class="img_container">
-
+                    <img src="http://africanbrains.net/wp-content/uploads/2012/08/Technology-African-Brains-Wikimedia-295x300.jpg" style="
+                        width: 100%;
+                        height: 100%;
+                    ">
                 </div>
                 <div id="presentation_summary">
                     <div class="title">
@@ -23,24 +26,40 @@
                         <div class="shadowRight"></div>
                     </div>
                 </div>
+                <a id="displayContact" class="glyphicon glyphicon-option-vertical" href="#"></a>
+                <div id="presentation_contact_shortcuts">
+                    {#.scrappers.doyoubuzzData.resume.resume.links.link}
+                    {@eq key=type value="Autre"}<a class="glyphicon glyphicon-cloud contactLink" href="{.url|s}"></a>{/eq}
+                    {/.scrappers.doyoubuzzData.resume.resume.links.link}
+                    <a class="glyphicon glyphicon-envelope contactLink" href="mailto:{.scrappers.doyoubuzzData.email|s}"></a>
+                    {#.scrappers.doyoubuzzData.resume.resume.contacts.contact}
+                    {@eq key=type value="phone"}
+                    <a class="glyphicon glyphicon-earphone contactLink" href="tel://{.value|s}"></a>
+                    {/eq}
+                    {/.scrappers.doyoubuzzData.resume.resume.contacts.contact}
+                </div>
                 <div id="presentation_contact">
                     <div class="websites">
                         <label>Websites</label>
                         <p>
-                            {#.scrappers.linkedInData.memberUrlResources.values}
-                            <a href="{.url|s}">{.url|s}</a><br />
-                            {/.scrappers.linkedInData.memberUrlResources.values}
+                            {#.scrappers.doyoubuzzData.resume.resume.links.link}
+                                {@eq key=type value="Autre"}<a href="{.url|s}">{.url|s}</a><br />{/eq}
+                            {/.scrappers.doyoubuzzData.resume.resume.links.link}
                         </p>
                     </div>
                     <div class="Email">
                         <label>Email</label>
-                        {.scrappers.linkedInData.emailAddress|s}
+                        {.scrappers.doyoubuzzData.email|s}
                     </div>
                     <div class="cell">
                         <label>Cell</label>
-                        {#scrappers.linkedInData.phoneNumbers.values}
-                        <div class="phoneAsset">{.phoneNumber|s} ( {scrappers.linkedInData.phoneNumbers.values[0].phoneType|s} )</div>
-                        {/scrappers.linkedInData.phoneNumbers.values}
+                        {#.scrappers.doyoubuzzData.resume.resume.contacts.contact}
+                            {@eq key=type value="phone"}
+                        <div class="phoneAsset">
+                            {.value|s}
+                        </div>
+                            {/eq}
+                        {/.scrappers.doyoubuzzData.resume.resume.contacts.contact}
                     </div>
                     <div class="social">
                         <label>Social links</label>
