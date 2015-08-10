@@ -38,7 +38,8 @@
                             <li {@eq key=page value="resume"} class="active" {/eq}><a href="/resume">Resume</a></li>
                             <li {@eq key=page value="blog"} class="active" {/eq}><a href="/blog">Blog</a></li>
                             <li {@eq key=page value="admin"} class="active" {/eq}><a href="/admin">Admin</a></li>
-                            <li><a href="#">Download</a></li>
+                            <li><a href="bin/romain_catoio_resume.pdf">Download</a></li>
+                            <li><a href="mailto:catoio.romain+rocat@gmail.com?subject=Contact">Contact</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
